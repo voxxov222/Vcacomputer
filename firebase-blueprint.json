@@ -5,8 +5,213 @@
       "fields": {
         "displayName": { "type": "string" },
         "email": { "type": "string" },
+        "role": { "type": "string" },
         "createdAt": { "type": "string" },
         "photoURL": { "type": "string" }
+      }
+    },
+    "Organization": {
+      "collection": "organizations",
+      "fields": {
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "license": { "type": "string" },
+        "createdAt": { "type": "string" }
+      }
+    },
+    "Submission": {
+      "collection": "submissions",
+      "fields": {
+        "submissionNumber": { "type": "string" },
+        "customerName": { "type": "string" },
+        "serviceLevel": { "type": "string" },
+        "cardCount": { "type": "number" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      }
+    },
+    "Card": {
+      "collection": "cards",
+      "fields": {
+        "submissionId": { "type": "string" },
+        "name": { "type": "string" },
+        "set": { "type": "string" },
+        "cardNumber": { "type": "string" },
+        "year": { "type": "number" },
+        "language": { "type": "string" },
+        "variant": { "type": "string" },
+        "frontImage": { "type": "string" },
+        "backImage": { "type": "string" },
+        "serialNumber": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      }
+    },
+    "Inspection": {
+      "collection": "inspections",
+      "fields": {
+        "cardId": { "type": "string" },
+        "version": { "type": "number" },
+        "modelVersion": { "type": "string" },
+        "overallGrade": { "type": "number" },
+        "gradeLabel": { "type": "string" },
+        "humanApproved": { "type": "boolean" },
+        "graderId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      }
+    },
+    "Subgrade": {
+      "collection": "subgrades",
+      "fields": {
+        "inspectionId": { "type": "string" },
+        "cardId": { "type": "string" },
+        "centering": { "type": "number" },
+        "corners": { "type": "number" },
+        "edges": { "type": "number" },
+        "surface": { "type": "number" },
+        "print": { "type": "number" },
+        "overall": { "type": "number" },
+        "createdAt": { "type": "string" }
+      }
+    },
+    "Defect": {
+      "collection": "defects",
+      "fields": {
+        "cardId": { "type": "string" },
+        "inspectionId": { "type": "string" },
+        "type": { "type": "string" },
+        "severity": { "type": "string" },
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "width": { "type": "number" },
+        "height": { "type": "number" },
+        "confidence": { "type": "number" },
+        "note": { "type": "string" },
+        "accepted": { "type": "boolean" }
+      }
+    },
+    "Evidence": {
+      "collection": "evidence",
+      "fields": {
+        "cardId": { "type": "string" },
+        "defectId": { "type": "string" },
+        "claim": { "type": "string" },
+        "category": { "type": "string" },
+        "measurement": { "type": "string" },
+        "confidence": { "type": "number" },
+        "taxonomy": { "type": "string" },
+        "cropImageUrl": { "type": "string" },
+        "createdAt": { "type": "string" }
+      }
+    },
+    "ReferenceCard": {
+      "collection": "reference_cards",
+      "fields": {
+        "cardId": { "type": "string" },
+        "name": { "type": "string" },
+        "setName": { "type": "string" },
+        "cardNumber": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "variant": { "type": "string" },
+        "verifiedAt": { "type": "string" }
+      }
+    },
+    "AuthenticationReport": {
+      "collection": "authentication_reports",
+      "fields": {
+        "cardId": { "type": "string" },
+        "status": { "type": "string" },
+        "confidence": { "type": "number" },
+        "testsSummary": { "type": "string" },
+        "flags": { "type": "array" },
+        "createdAt": { "type": "string" }
+      }
+    },
+    "MarketValue": {
+      "collection": "market_values",
+      "fields": {
+        "cardId": { "type": "string" },
+        "rawValue": { "type": "number" },
+        "gemMint10Value": { "type": "number" },
+        "mint9Value": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "Certificate": {
+      "collection": "certificates",
+      "fields": {
+        "serialNumber": { "type": "string" },
+        "cardId": { "type": "string" },
+        "grade": { "type": "number" },
+        "gradeLabel": { "type": "string" },
+        "status": { "type": "string" },
+        "qrCodeUrl": { "type": "string" },
+        "issuedAt": { "type": "string" }
+      }
+    },
+    "NfcBinding": {
+      "collection": "nfc_bindings",
+      "fields": {
+        "serialNumber": { "type": "string" },
+        "nfcUid": { "type": "string" },
+        "chipType": { "type": "string" },
+        "status": { "type": "string" },
+        "boundAt": { "type": "string" }
+      }
+    },
+    "Slab": {
+      "collection": "slabs",
+      "fields": {
+        "slabId": { "type": "string" },
+        "serialNumber": { "type": "string" },
+        "labelType": { "type": "string" },
+        "tamperProofHash": { "type": "string" },
+        "assembledAt": { "type": "string" }
+      }
+    },
+    "LedgerRecord": {
+      "collection": "ledger_records",
+      "fields": {
+        "recordId": { "type": "string" },
+        "serialNumber": { "type": "string" },
+        "eventType": { "type": "string" },
+        "actor": { "type": "string" },
+        "details": { "type": "string" },
+        "previousHash": { "type": "string" },
+        "blockHash": { "type": "string" },
+        "timestamp": { "type": "string" }
+      }
+    },
+    "AuditEvent": {
+      "collection": "audit_events",
+      "fields": {
+        "cardId": { "type": "string" },
+        "serialNumber": { "type": "string" },
+        "operator": { "type": "string" },
+        "action": { "type": "string" },
+        "previousValue": { "type": "string" },
+        "newValue": { "type": "string" },
+        "reason": { "type": "string" },
+        "timestamp": { "type": "string" }
+      }
+    },
+    "GradingModel": {
+      "collection": "grading_models",
+      "fields": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "active": { "type": "boolean" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "GradingTool": {
+      "collection": "grading_tools",
+      "fields": {
+        "toolId": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "version": { "type": "string" },
+        "enabled": { "type": "boolean" }
       }
     },
     "VaultCard": {

@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 
 const SUGGESTED_REPOS = [
+  { name: 'pokemon-tcg-mcp', url: 'https://github.com/grzetich/pokemon-tcg-mcp', desc: 'Model Context Protocol (MCP) server exposing the Pokémon TCG API (pokemontcg.io) with 9 tools.' },
   { name: 'tcg-mcp', url: 'https://github.com/seanlok/tcg-mcp', desc: 'MCP server with 25 tools for PSA certs, pop reports, pricing & cards.' },
   { name: 'pokemon-tcg-data', url: 'https://github.com/PokemonTCG/pokemon-tcg-data', desc: 'Comprehensive JSON dataset of all Pokémon TCG sets, cards, and rarities.' },
   { name: 'card-centering-ai', url: 'https://github.com/voxxov222/card-centering-ai', desc: 'Computer vision centering subgrade ratio and boundary calculation.' }
