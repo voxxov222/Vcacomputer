@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 450" width="100%" height="100%" style="background:#090d16; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <defs>
+    <linearGradient id="boxGrad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <filter id="boxShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="30" y="40" fill="#38bdf8" font-size="18" font-weight="bold">VCA OS — Multi-Agent & Runtime Architecture</text>
+  <text x="30" y="60" fill="#94a3b8" font-size="11">Zero-Trust Linux Container IPC with Real Hardware NFC & AI Vision Forensics</text>
+
+  <!-- COLUMN 1: Client / Web Desktop Layer -->
+  <g transform="translate(30, 90)" filter="url(#boxShadow)">
+    <rect width="280" height="320" rx="12" fill="url(#boxGrad1)" stroke="#38bdf8" stroke-width="1"/>
+    <rect x="0" y="0" width="280" height="36" rx="12 12 0 0" fill="#0284c7" fill-opacity="0.2"/>
+    <text x="16" y="24" fill="#7dd3fc" font-size="12" font-weight="bold">1. React 19 Client OS Workspace</text>
+
+    <!-- Sub items -->
+    <rect x="14" y="50" width="252" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="68" fill="#ffffff" font-size="11" font-weight="600">Window Manager & Layout Engine</text>
+    <text x="24" y="82" fill="#94a3b8" font-size="9">Z-Index Elevation, Snap Zones, Tiling</text>
+
+    <rect x="14" y="102" width="252" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="120" fill="#ffffff" font-size="11" font-weight="600">Dynamic Desktop Widgets Layer</text>
+    <text x="24" y="134" fill="#94a3b8" font-size="9">Live telemetry, memory gauges, notes</text>
+
+    <rect x="14" y="154" width="252" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="172" fill="#ffffff" font-size="11" font-weight="600">App Suite & Side Utilities Drawer</text>
+    <text x="24" y="186" fill="#94a3b8" font-size="9">Terminal, Code Editor, Forensics, Slides</text>
+
+    <rect x="14" y="206" width="252" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="224" fill="#ffffff" font-size="11" font-weight="600">Hardware Bridge UI & Audio Synthesizer</text>
+    <text x="24" y="238" fill="#94a3b8" font-size="9">NFC writer, USB serial, WebAudio</text>
+
+    <rect x="14" y="258" width="252" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="276" fill="#ffffff" font-size="11" font-weight="600">Encrypted Secrets Vault</text>
+    <text x="24" y="290" fill="#94a3b8" font-size="9">AES-256 zero-knowledge client security</text>
+  </g>
+
+  <!-- ARROW 1 -->
+  <g stroke="#0ea5e9" stroke-width="2" fill="none">
+    <path d="M 320, 240 L 355, 240"/>
+    <polygon points="355,236 363,240 355,244" fill="#0ea5e9"/>
+  </g>
+
+  <!-- COLUMN 2: Server & Linux IPC Layer -->
+  <g transform="translate(370, 90)" filter="url(#boxShadow)">
+    <rect width="280" height="320" rx="12" fill="url(#boxGrad1)" stroke="#10b981" stroke-width="1"/>
+    <rect x="0" y="0" width="280" height="36" rx="12 12 0 0" fill="#059669" fill-opacity="0.2"/>
+    <text x="16" y="24" fill="#6ee7b7" font-size="12" font-weight="bold">2. Express 4 / Node.js IPC Subsystem</text>
+
+    <rect x="14" y="50" width="252" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="68" fill="#ffffff" font-size="11" font-weight="600">Direct Process Supervisor (child_process)</text>
+    <text x="24" y="82" fill="#94a3b8" font-size="9">Executes commands, spawns long-running PIDs</text>
+
+    <rect x="14" y="102" width="252" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="120" fill="#ffffff" font-size="11" font-weight="600">Local Filesystem Native Tree</text>
+    <text x="24" y="134" fill="#94a3b8" font-size="9">Atomic read, write, delete, search in workspace</text>
+
+    <rect x="14" y="154" width="252" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="172" fill="#ffffff" font-size="11" font-weight="600">Port Conflict Sentinel & Allocator</text>
+    <text x="24" y="186" fill="#94a3b8" font-size="9">Dynamic proxying and health check pingers</text>
+
+    <rect x="14" y="206" width="252" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="224" fill="#ffffff" font-size="11" font-weight="600">Security cgroups & Permission Gates</text>
+    <text x="24" y="238" fill="#94a3b8" font-size="9">Requires explicit human approval for writes</text>
+
+    <rect x="14" y="258" width="252" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="276" fill="#ffffff" font-size="11" font-weight="600">Streaming Telemetry Engine</text>
+    <text x="24" y="290" fill="#94a3b8" font-size="9">Real CPU, memory load, uptime emitter</text>
+  </g>
+
+  <!-- ARROW 2 -->
+  <g stroke="#10b981" stroke-width="2" fill="none">
+    <path d="M 660, 240 L 695, 240"/>
+    <polygon points="695,236 703,240 695,244" fill="#10b981"/>
+  </g>
+
+  <!-- COLUMN 3: Multi-Agent AI & Forensics Layer -->
+  <g transform="translate(710, 90)" filter="url(#boxShadow)">
+    <rect width="260" height="320" rx="12" fill="url(#boxGrad1)" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="0" y="0" width="260" height="36" rx="12 12 0 0" fill="#d97706" fill-opacity="0.2"/>
+    <text x="16" y="24" fill="#fde68a" font-size="12" font-weight="bold">3. Multi-Agent & Forensics Lab</text>
+
+    <rect x="14" y="50" width="232" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="68" fill="#ffffff" font-size="11" font-weight="600">AI Coding Agents Swarm</text>
+    <text x="24" y="82" fill="#94a3b8" font-size="9">Autonomous code generation & packaging</text>
+
+    <rect x="14" y="102" width="232" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="120" fill="#ffffff" font-size="11" font-weight="600">Autonomous Stack Trace Debugger</text>
+    <text x="24" y="134" fill="#94a3b8" font-size="9">Self-healing runtime compiler & npm fixer</text>
+
+    <rect x="14" y="154" width="232" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="172" fill="#ffffff" font-size="11" font-weight="600">VCA Optical Subgrades Engine</text>
+    <text x="24" y="186" fill="#94a3b8" font-size="9">Centering, Corners, Edges, Surface CV</text>
+
+    <rect x="14" y="206" width="232" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="224" fill="#ffffff" font-size="11" font-weight="600">NFC Cryptographic Binding</text>
+    <text x="24" y="238" fill="#94a3b8" font-size="9">NTAG215 AES-128 physical slab tamper lock</text>
+
+    <rect x="14" y="258" width="232" height="42" rx="6" fill="#090d16" stroke="#334155" stroke-width="0.5"/>
+    <text x="24" y="276" fill="#ffffff" font-size="11" font-weight="600">Live Valuation & Auction Sentinel</text>
+    <text x="24" y="290" fill="#94a3b8" font-size="9">Real-time eBay/TCGPlayer price aggregator</text>
+  </g>
+</svg>

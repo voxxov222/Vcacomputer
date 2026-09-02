@@ -1,0 +1,32 @@
+{
+  "entities": {
+    "UserProfile": {
+      "collection": "users",
+      "fields": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "photoURL": { "type": "string" }
+      }
+    },
+    "VaultCard": {
+      "collection": "users/{uid}/vault",
+      "fields": {
+        "name": { "type": "string" },
+        "set": { "type": "string" },
+        "setSymbol": { "type": "string" },
+        "cardNumber": { "type": "string" },
+        "language": { "type": "string" },
+        "variant": { "type": "string" },
+        "rawValue": { "type": "number" },
+        "psa10Value": { "type": "number" },
+        "psa9Value": { "type": "number" },
+        "psa8Value": { "type": "number" },
+        "ebayComps": { "type": "array" },
+        "imageUrl": { "type": "string" },
+        "scannedAt": { "type": "string" },
+        "lastPriceRefresh": { "type": "string" }
+      }
+    }
+  }
+}

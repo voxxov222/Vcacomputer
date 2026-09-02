@@ -1,0 +1,310 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%" style="background:#06080e; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#070a12"/>
+      <stop offset="50%" stop-color="#0c1220"/>
+      <stop offset="100%" stop-color="#05070a"/>
+    </linearGradient>
+    <linearGradient id="cyanGlow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="purpleGlow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="emeraldGlow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Background Wallpaper -->
+  <rect width="1200" height="675" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Grid Lines -->
+  <g stroke="#1e293b" stroke-width="0.5" opacity="0.3">
+    <line x1="0" y1="135" x2="1200" y2="135"/>
+    <line x1="0" y1="270" x2="1200" y2="270"/>
+    <line x1="0" y1="405" x2="1200" y2="405"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="240" y1="0" x2="240" y2="675"/>
+    <line x1="480" y1="0" x2="480" y2="675"/>
+    <line x1="720" y1="0" x2="720" y2="675"/>
+    <line x1="960" y1="0" x2="960" y2="675"/>
+  </g>
+
+  <!-- TOP BAR -->
+  <rect x="0" y="0" width="1200" height="34" fill="#0f172a" fill-opacity="0.9" stroke="#1e293b" stroke-width="1"/>
+  <circle cx="20" cy="17" r="5" fill="#06b6d4" filter="url(#glow)"/>
+  <text x="32" y="21" fill="#ffffff" font-size="12" font-weight="bold" letter-spacing="0.5">VCA OS</text>
+  <text x="95" y="21" fill="#94a3b8" font-size="11">Workspaces</text>
+  <text x="175" y="21" fill="#94a3b8" font-size="11">Forensics</text>
+  <text x="245" y="21" fill="#94a3b8" font-size="11">Agents</text>
+  <text x="300" y="21" fill="#94a3b8" font-size="11">Terminal</text>
+
+  <!-- Top Right Stats -->
+  <rect x="830" y="6" width="110" height="22" rx="4" fill="#1e293b" opacity="0.6"/>
+  <text x="840" y="21" fill="#38bdf8" font-size="10" font-family="monospace">⚡ CPU: 14%</text>
+  <rect x="948" y="6" width="110" height="22" rx="4" fill="#1e293b" opacity="0.6"/>
+  <text x="958" y="21" fill="#34d399" font-size="10" font-family="monospace">🧠 RAM: 420MB</text>
+  <rect x="1066" y="6" width="120" height="22" rx="4" fill="#0284c7" fill-opacity="0.2" stroke="#0ea5e9" stroke-width="1"/>
+  <text x="1076" y="21" fill="#7dd3fc" font-size="10" font-weight="bold">🔧 Side Tools</text>
+
+  <!-- DESKTOP WIDGET 1: System Vitals -->
+  <g transform="translate(30, 55)" filter="url(#shadow)">
+    <rect width="210" height="130" rx="12" fill="#0f172a" fill-opacity="0.85" stroke="#334155" stroke-width="1"/>
+    <text x="14" y="26" fill="#38bdf8" font-size="11" font-weight="bold">HARDWARE SENTINEL</text>
+    <text x="180" y="26" fill="#34d399" font-size="10" font-family="monospace">LIVE</text>
+    
+    <text x="14" y="52" fill="#94a3b8" font-size="10">CPU Load (4 Cores)</text>
+    <rect x="14" y="58" width="180" height="6" rx="3" fill="#1e293b"/>
+    <rect x="14" y="58" width="54" height="6" rx="3" fill="url(#cyanGlow)"/>
+    
+    <text x="14" y="84" fill="#94a3b8" font-size="10">Memory Allocation</text>
+    <rect x="14" y="90" width="180" height="6" rx="3" fill="#1e293b"/>
+    <rect x="14" y="90" width="110" height="6" rx="3" fill="url(#emeraldGlow)"/>
+    
+    <text x="14" y="116" fill="#64748b" font-size="9" font-family="monospace">Port :3000 Active • IPC OK</text>
+  </g>
+
+  <!-- DESKTOP WIDGET 2: Active Agents -->
+  <g transform="translate(30, 200)" filter="url(#shadow)">
+    <rect width="210" height="130" rx="12" fill="#0f172a" fill-opacity="0.85" stroke="#334155" stroke-width="1"/>
+    <text x="14" y="26" fill="#fbbf24" font-size="11" font-weight="bold">AGENT SWARM</text>
+    <rect x="15" y="40" width="180" height="36" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.5"/>
+    <text x="24" y="56" fill="#fef3c7" font-size="10" font-weight="bold">Full-Stack Synthesis</text>
+    <text x="24" y="68" fill="#fbbf24" font-size="9">Status: Generating routes...</text>
+    
+    <rect x="15" y="82" width="180" height="36" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
+    <text x="24" y="98" fill="#e0f2fe" font-size="10" font-weight="bold">Debugger Sentinel</text>
+    <text x="24" y="110" fill="#38bdf8" font-size="9">Status: Watching stderr logs</text>
+  </g>
+
+  <!-- WINDOW 1: AI CODING AGENTS LAB (Top Center-Right) -->
+  <g transform="translate(260, 50)" filter="url(#shadow)">
+    <rect width="560" height="340" rx="12" fill="#090d16" stroke="#0284c7" stroke-width="1.5"/>
+    <!-- Titlebar -->
+    <path d="M 0,12 Q 0,0 12,0 L 548,0 Q 560,0 560,12 L 560,34 L 0,34 Z" fill="#0f172a"/>
+    <!-- Traffic lights -->
+    <circle cx="16" cy="17" r="5" fill="#ef4444"/>
+    <circle cx="32" cy="17" r="5" fill="#f59e0b"/>
+    <circle cx="48" cy="17" r="5" fill="#10b981"/>
+    <text x="68" y="21" fill="#f1f5f9" font-size="11" font-weight="600">⚡ Autonomous Coding Agents Lab — gemini-2.5-pro</text>
+    <rect x="470" y="7" width="76" height="20" rx="4" fill="#0369a1" fill-opacity="0.4" stroke="#38bdf8" stroke-width="0.5"/>
+    <text x="480" y="21" fill="#7dd3fc" font-size="9" font-weight="bold">RUNNING</text>
+
+    <!-- Content Split -->
+    <!-- Left Chat Prompt / Steps -->
+    <rect x="12" y="44" width="220" height="284" rx="8" fill="#050811" stroke="#1e293b" stroke-width="1"/>
+    <text x="22" y="64" fill="#38bdf8" font-size="10" font-weight="bold">AUTONOMOUS OBJECTIVE</text>
+    <rect x="20" y="74" width="204" height="42" rx="6" fill="#0f172a"/>
+    <text x="28" y="90" fill="#e2e8f0" font-size="9">"Build full-stack grading app with</text>
+    <text x="28" y="104" fill="#e2e8f0" font-size="9">port allocation and preview"</text>
+    
+    <text x="22" y="136" fill="#94a3b8" font-size="9" font-weight="bold">EXECUTION STEPS</text>
+    <circle cx="28" cy="154" r="4" fill="#10b981"/>
+    <text x="38" y="157" fill="#a7f3d0" font-size="9">1. Discover workspace</text>
+    <circle cx="28" cy="174" r="4" fill="#10b981"/>
+    <text x="38" y="177" fill="#a7f3d0" font-size="9">2. Generate Express routes</text>
+    <circle cx="28" cy="194" r="4" fill="#10b981"/>
+    <text x="38" y="197" fill="#a7f3d0" font-size="9">3. Install dependencies</text>
+    <circle cx="28" cy="214" r="4" fill="#38bdf8"/>
+    <text x="38" y="217" fill="#7dd3fc" font-size="9">4. Boot sub-server :3001</text>
+    <circle cx="28" cy="234" r="4" fill="#64748b"/>
+    <text x="38" y="237" fill="#64748b" font-size="9">5. Verify live preview</text>
+
+    <rect x="20" y="280" width="204" height="34" rx="6" fill="#0284c7" fill-opacity="0.3" stroke="#0ea5e9" stroke-width="1"/>
+    <text x="30" y="301" fill="#e0f2fe" font-size="10" font-weight="bold">🚀 Run New Objective</text>
+
+    <!-- Right Code & Output Panel -->
+    <rect x="242" y="44" width="306" height="284" rx="8" fill="#020408" stroke="#1e293b" stroke-width="1"/>
+    <rect x="242" y="44" width="306" height="26" fill="#0f172a" rx="8 8 0 0"/>
+    <text x="254" y="61" fill="#94a3b8" font-size="10" font-family="monospace">src/server/gradingEngine.ts</text>
+    
+    <text x="254" y="90" fill="#ec4899" font-size="9" font-family="monospace">import</text>
+    <text x="295" y="90" fill="#e2e8f0" font-size="9" font-family="monospace">{ GoogleGenAI } from</text>
+    <text x="420" y="90" fill="#34d399" font-size="9" font-family="monospace">'@google/genai';</text>
+
+    <text x="254" y="110" fill="#38bdf8" font-size="9" font-family="monospace">export async function</text>
+    <text x="390" y="110" fill="#fbbf24" font-size="9" font-family="monospace">gradeCard(image)</text>
+    <text x="485" y="110" fill="#e2e8f0" font-size="9" font-family="monospace">{</text>
+
+    <text x="268" y="130" fill="#94a3b8" font-size="9" font-family="monospace">// Optical Subgrades Engine</text>
+    <text x="268" y="150" fill="#e2e8f0" font-size="9" font-family="monospace">const centering = await calcRatio(image);</text>
+    <text x="268" y="170" fill="#e2e8f0" font-size="9" font-family="monospace">const corners = await scanMicroFlaws(image);</text>
+    <text x="268" y="190" fill="#34d399" font-size="9" font-family="monospace">return { grade: 10, gemMint: true };</text>
+    <text x="254" y="210" fill="#e2e8f0" font-size="9" font-family="monospace">}</text>
+
+    <!-- Terminal Output Strip -->
+    <rect x="250" y="235" width="290" height="82" rx="6" fill="#090d16" stroke="#334155" stroke-width="1"/>
+    <text x="258" y="252" fill="#38bdf8" font-size="8" font-family="monospace">[Agent Swarm] Compiling TypeScript AST...</text>
+    <text x="258" y="268" fill="#34d399" font-size="8" font-family="monospace">[Agent Swarm] Port 3001 open • 0 errors</text>
+    <text x="258" y="284" fill="#a7f3d0" font-size="8" font-family="monospace">✓ Live preview connected to VCA Shell</text>
+    <text x="258" y="300" fill="#fbbf24" font-size="8" font-family="monospace">&gt; Ready for next user instruction_</text>
+  </g>
+
+  <!-- WINDOW 2: VCA FORENSIC LAB (Bottom Center-Left) -->
+  <g transform="translate(180, 240)" filter="url(#shadow)">
+    <rect width="520" height="340" rx="12" fill="#090d16" stroke="#10b981" stroke-width="1.5"/>
+    <!-- Titlebar -->
+    <path d="M 0,12 Q 0,0 12,0 L 508,0 Q 520,0 520,12 L 520,34 L 0,34 Z" fill="#064e3b"/>
+    <circle cx="16" cy="17" r="5" fill="#ef4444"/>
+    <circle cx="32" cy="17" r="5" fill="#f59e0b"/>
+    <circle cx="48" cy="17" r="5" fill="#10b981"/>
+    <text x="68" y="21" fill="#f1f5f9" font-size="11" font-weight="600">🛡️ VCA Certified Collectible Forensics & Subgrade Lab</text>
+
+    <!-- Left: Holographic Slab Preview -->
+    <g transform="translate(18, 48)">
+      <rect width="180" height="270" rx="10" fill="#022c22" stroke="#10b981" stroke-width="1.5"/>
+      <rect x="12" y="12" width="156" height="50" rx="6" fill="#065f46" stroke="#34d399" stroke-width="1"/>
+      <text x="20" y="30" fill="#fef08a" font-size="10" font-weight="bold">VERIFIED CARD AUTHORITY</text>
+      <text x="20" y="44" fill="#a7f3d0" font-size="8">1999 Charizard 1st Edition #4</text>
+      <text x="128" y="44" fill="#ffffff" font-size="16" font-weight="bold">10</text>
+      <text x="128" y="55" fill="#6ee7b7" font-size="7">GEM MINT</text>
+
+      <!-- Card art mock -->
+      <rect x="20" y="72" width="140" height="150" rx="6" fill="#064e3b" stroke="#047857" stroke-width="1"/>
+      <circle cx="90" cy="140" r="45" fill="#ef4444" fill-opacity="0.3"/>
+      <text x="45" y="145" fill="#fef08a" font-size="12" font-weight="bold">CHARIZARD</text>
+
+      <rect x="12" y="232" width="156" height="26" rx="4" fill="#064e3b"/>
+      <text x="20" y="248" fill="#34d399" font-size="8" font-family="monospace">NFC: 0x94BA2019481 • LOCKED</text>
+    </g>
+
+    <!-- Right: Optical Inspection Scores -->
+    <g transform="translate(210, 48)">
+      <text x="0" y="18" fill="#34d399" font-size="12" font-weight="bold">FORENSIC OPTICAL SUBGRADES</text>
+      <text x="0" y="32" fill="#94a3b8" font-size="9">Sub-millimeter edge, centering & surface scan</text>
+
+      <rect x="0" y="44" width="290" height="42" rx="6" fill="#022c22" stroke="#047857" stroke-width="1"/>
+      <text x="12" y="62" fill="#ffffff" font-size="10" font-weight="bold">Centering Ratio: 50/50 Perfect</text>
+      <text x="240" y="62" fill="#34d399" font-size="12" font-weight="bold">10.0</text>
+      <text x="12" y="76" fill="#6ee7b7" font-size="8">L/R: 50.1% | T/B: 49.9% optical alignment</text>
+
+      <rect x="0" y="94" width="290" height="42" rx="6" fill="#022c22" stroke="#047857" stroke-width="1"/>
+      <text x="12" y="112" fill="#ffffff" font-size="10" font-weight="bold">Corners: Zero White Chipping</text>
+      <text x="240" y="112" fill="#34d399" font-size="12" font-weight="bold">10.0</text>
+      <text x="12" y="126" fill="#6ee7b7" font-size="8">All 4 quadrant radiuses mathematically sharp</text>
+
+      <rect x="0" y="144" width="290" height="42" rx="6" fill="#022c22" stroke="#047857" stroke-width="1"/>
+      <text x="12" y="162" fill="#ffffff" font-size="10" font-weight="bold">Surface: Flawless Hologram</text>
+      <text x="240" y="162" fill="#34d399" font-size="12" font-weight="bold">9.5</text>
+      <text x="12" y="176" fill="#6ee7b7" font-size="8">0 print lines, microscopic foil sheen</text>
+
+      <!-- NFC & Market Valuation -->
+      <rect x="0" y="200" width="140" height="65" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+      <text x="10" y="218" fill="#94a3b8" font-size="8">MARKET VALUE</text>
+      <text x="10" y="240" fill="#34d399" font-size="16" font-weight="bold">$325,000</text>
+      <text x="10" y="254" fill="#6ee7b7" font-size="8">▲ +14.2% (90d)</text>
+
+      <rect x="150" y="200" width="140" height="65" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+      <text x="160" y="218" fill="#94a3b8" font-size="8">ENCRYPTED NFC</text>
+      <text x="160" y="238" fill="#38bdf8" font-size="11" font-weight="bold">NTAG215 CHIP</text>
+      <text x="160" y="254" fill="#a5f3fc" font-size="8">Hardware Bound</text>
+    </g>
+  </g>
+
+  <!-- WINDOW 3: LINUX TERMINAL (Top Right Overlap) -->
+  <g transform="translate(840, 70)" filter="url(#shadow)">
+    <rect width="330" height="420" rx="12" fill="#030712" stroke="#334155" stroke-width="1.5"/>
+    <path d="M 0,12 Q 0,0 12,0 L 318,0 Q 330,0 330,12 L 330,34 L 0,34 Z" fill="#0f172a"/>
+    <circle cx="16" cy="17" r="5" fill="#ef4444"/>
+    <circle cx="32" cy="17" r="5" fill="#f59e0b"/>
+    <circle cx="48" cy="17" r="5" fill="#10b981"/>
+    <text x="68" y="21" fill="#f1f5f9" font-size="11" font-weight="600">🐚 Host Linux Terminal</text>
+
+    <!-- Shell Text -->
+    <g font-family="monospace" font-size="9" fill="#94a3b8">
+      <text x="14" y="58" fill="#38bdf8">vca@runtime-sandbox:~$</text>
+      <text x="145" y="58" fill="#f1f5f9">uname -a</text>
+      <text x="14" y="74">Linux vca-os-container 6.6.137 x86_64</text>
+      
+      <text x="14" y="98" fill="#38bdf8">vca@runtime-sandbox:~$</text>
+      <text x="145" y="98" fill="#f1f5f9">npm list --depth=0</text>
+      <text x="14" y="114" fill="#34d399">├── @google/genai@2.4.0</text>
+      <text x="14" y="128" fill="#34d399">├── express@4.21.2</text>
+      <text x="14" y="142" fill="#34d399">├── react@19.0.1</text>
+      <text x="14" y="156" fill="#34d399">└── tailwindcss@4.1.14</text>
+
+      <text x="14" y="180" fill="#38bdf8">vca@runtime-sandbox:~$</text>
+      <text x="145" y="180" fill="#f1f5f9">vca-agents status</text>
+      <text x="14" y="196" fill="#fbbf24">✓ Orchestrator: READY</text>
+      <text x="14" y="210" fill="#34d399">✓ Self-Healing Debugger: ACTIVE</text>
+      <text x="14" y="224" fill="#38bdf8">✓ Live Port Supervisor: 3000, 3001</text>
+      
+      <text x="14" y="250" fill="#38bdf8">vca@runtime-sandbox:~$</text>
+      <text x="145" y="250" fill="#f1f5f9">git status</text>
+      <text x="14" y="266">On branch main</text>
+      <text x="14" y="280">Your branch is up to date.</text>
+
+      <text x="14" y="310" fill="#38bdf8">vca@runtime-sandbox:~$</text>
+      <text x="145" y="310" fill="#f1f5f9">vca-nfc-bind --cert 0x94819</text>
+      <text x="14" y="326" fill="#34d399">[NFC] AES-128 Key Written to Chip</text>
+      <text x="14" y="340" fill="#34d399">[NFC] Immutable Cert Hash Locked ✓</text>
+
+      <text x="14" y="370" fill="#38bdf8">vca@runtime-sandbox:~$</text>
+      <rect x="145" y="362" width="6" height="12" fill="#38bdf8" opacity="0.8"/>
+    </g>
+  </g>
+
+  <!-- DOCK AT BOTTOM -->
+  <g transform="translate(300, 608)" filter="url(#shadow)">
+    <!-- Frosted Dock Glass -->
+    <rect width="600" height="56" rx="18" fill="#090d16" fill-opacity="0.85" stroke="#334155" stroke-width="1"/>
+    
+    <!-- Dock Icons -->
+    <!-- 1. VCA Forensics -->
+    <rect x="24" y="10" width="36" height="36" rx="10" fill="#047857"/>
+    <text x="32" y="33" fill="#ffffff" font-size="16">🛡️</text>
+
+    <!-- 2. Coding Agents -->
+    <rect x="74" y="10" width="36" height="36" rx="10" fill="#b45309"/>
+    <text x="82" y="33" fill="#ffffff" font-size="16">⚡</text>
+
+    <!-- 3. Terminal -->
+    <rect x="124" y="10" width="36" height="36" rx="10" fill="#1e293b"/>
+    <text x="132" y="33" fill="#38bdf8" font-size="16">🐚</text>
+
+    <!-- 4. Files Explorer -->
+    <rect x="174" y="10" width="36" height="36" rx="10" fill="#1d4ed8"/>
+    <text x="182" y="33" fill="#ffffff" font-size="16">📁</text>
+
+    <!-- 5. Code Editor -->
+    <rect x="224" y="10" width="36" height="36" rx="10" fill="#0369a1"/>
+    <text x="232" y="33" fill="#ffffff" font-size="16">📝</text>
+
+    <!-- 6. Browser -->
+    <rect x="274" y="10" width="36" height="36" rx="10" fill="#0f766e"/>
+    <text x="282" y="33" fill="#ffffff" font-size="16">🌐</text>
+
+    <!-- 7. Process Manager -->
+    <rect x="324" y="10" width="36" height="36" rx="10" fill="#be123c"/>
+    <text x="332" y="33" fill="#ffffff" font-size="16">⚙️</text>
+
+    <!-- 8. GitHub Runner -->
+    <rect x="374" y="10" width="36" height="36" rx="10" fill="#6d28d9"/>
+    <text x="382" y="33" fill="#ffffff" font-size="16">🐙</text>
+
+    <!-- 9. AI Command -->
+    <rect x="424" y="10" width="36" height="36" rx="10" fill="#7c3aed"/>
+    <text x="432" y="33" fill="#ffffff" font-size="16">✨</text>
+
+    <!-- 10. Marketplace -->
+    <rect x="474" y="10" width="36" height="36" rx="10" fill="#a21caf"/>
+    <text x="482" y="33" fill="#ffffff" font-size="16">🛍️</text>
+
+    <!-- 11. Security Vault -->
+    <rect x="524" y="10" width="36" height="36" rx="10" fill="#059669"/>
+    <text x="532" y="33" fill="#ffffff" font-size="16">🔑</text>
+
+    <line x1="514" y1="16" x2="514" y2="40" stroke="#334155" stroke-width="1"/>
+  </g>
+</svg>

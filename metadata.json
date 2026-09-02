@@ -1,0 +1,11 @@
+{
+  "name": "Verified Card Authority",
+  "description": "Professional AI-Powered Collectible Authentication, Grading, Certification, NFC Identity, Valuation Intelligence, and Work Operating System.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

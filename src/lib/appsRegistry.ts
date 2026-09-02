@@ -1,0 +1,301 @@
+import { AppMetadata, AppId } from '../types/os';
+
+export const APPS_REGISTRY: Record<AppId, AppMetadata> = {
+  voice_agent: {
+    id: 'voice_agent',
+    name: 'Voice AI Agent',
+    icon: 'Mic',
+    category: 'Intelligence',
+    description: '2-Way real-time conversational Voice AI with hands-free listening, natural speech synthesis, and live terminal command execution.',
+    defaultWidth: 960,
+    defaultHeight: 660,
+    minWidth: 500,
+    minHeight: 400
+  },
+  coding_agents: {
+    id: 'coding_agents',
+    name: 'Coding Agents',
+    icon: 'Bot',
+    category: 'Development',
+    description: 'AI Software Engineering Laboratory: Discovery, Architecture, GitHub Subscriptions, Diagnostics, Operations & Multi-Agent Swarms.',
+    defaultWidth: 1040,
+    defaultHeight: 700,
+    minWidth: 640,
+    minHeight: 480
+  },
+  command: {
+    id: 'command',
+    name: 'AI Command Center',
+    icon: 'Sparkles',
+    category: 'Intelligence',
+    description: 'Autonomous goal director, multi-agent execution pipeline & computer mode simulator.',
+    defaultWidth: 920,
+    defaultHeight: 640,
+    minWidth: 550,
+    minHeight: 450
+  },
+  files: {
+    id: 'files',
+    name: 'Files & Storage',
+    icon: 'Folder',
+    category: 'System',
+    description: 'Persistent Unix-style virtual filesystem with instant previewers for Docs, Code & Sheets.',
+    defaultWidth: 880,
+    defaultHeight: 580,
+    minWidth: 480,
+    minHeight: 380
+  },
+  browser: {
+    id: 'browser',
+    name: 'Web Browser',
+    icon: 'Globe',
+    category: 'Productivity',
+    description: 'Sandboxed web explorer with AI automation layer, search grounding & DOM extractor.',
+    defaultWidth: 900,
+    defaultHeight: 600,
+    minWidth: 500,
+    minHeight: 400
+  },
+  terminal: {
+    id: 'terminal',
+    name: 'Terminal',
+    icon: 'Terminal',
+    category: 'Development',
+    description: 'Sandboxed shell with interactive commands, python/node runner & system telemetry.',
+    defaultWidth: 780,
+    defaultHeight: 500,
+    minWidth: 460,
+    minHeight: 320
+  },
+  code: {
+    id: 'code',
+    name: 'Code Studio',
+    icon: 'Code2',
+    category: 'Development',
+    description: 'Integrated IDE with syntax highlighter, AI coding assistant, git commits & live preview.',
+    defaultWidth: 960,
+    defaultHeight: 640,
+    minWidth: 540,
+    minHeight: 420
+  },
+  docs: {
+    id: 'docs',
+    name: 'Documents',
+    icon: 'FileText',
+    category: 'Productivity',
+    description: 'Rich-text & Markdown authoring workspace with AI expand, summarize & citation tools.',
+    defaultWidth: 820,
+    defaultHeight: 580,
+    minWidth: 460,
+    minHeight: 380
+  },
+  sheets: {
+    id: 'sheets',
+    name: 'Spreadsheets',
+    icon: 'Table',
+    category: 'Productivity',
+    description: 'Interactive computational grid with formula evaluation, CSV import/export & charts.',
+    defaultWidth: 880,
+    defaultHeight: 560,
+    minWidth: 500,
+    minHeight: 360
+  },
+  slides: {
+    id: 'slides',
+    name: 'Presentations',
+    icon: 'Presentation',
+    category: 'Productivity',
+    description: 'Deck builder with AI slide generation, themes, presenter notes & fullscreen mode.',
+    defaultWidth: 890,
+    defaultHeight: 590,
+    minWidth: 520,
+    minHeight: 380
+  },
+  mail: {
+    id: 'mail',
+    name: 'Mail Client',
+    icon: 'Mail',
+    category: 'Productivity',
+    description: 'Email triage workspace with AI summary, automated draft responses & inbox urgency flags.',
+    defaultWidth: 860,
+    defaultHeight: 560,
+    minWidth: 480,
+    minHeight: 360
+  },
+  calendar: {
+    id: 'calendar',
+    name: 'Calendar',
+    icon: 'Calendar',
+    category: 'Productivity',
+    description: 'Interactive scheduling planner with agenda views and automated agent sync jobs.',
+    defaultWidth: 820,
+    defaultHeight: 550,
+    minWidth: 460,
+    minHeight: 360
+  },
+  tasks: {
+    id: 'tasks',
+    name: 'Tasks & Projects',
+    icon: 'CheckSquare',
+    category: 'Productivity',
+    description: 'Kanban boards and project task tracking with autonomous agent assignments.',
+    defaultWidth: 860,
+    defaultHeight: 560,
+    minWidth: 480,
+    minHeight: 360
+  },
+  workflows: {
+    id: 'workflows',
+    name: 'Workflows & Cron',
+    icon: 'GitFork',
+    category: 'Intelligence',
+    description: 'Visual node-based automation builder with interval cron jobs and checkpoint recovery.',
+    defaultWidth: 940,
+    defaultHeight: 620,
+    minWidth: 540,
+    minHeight: 420
+  },
+  memory: {
+    id: 'memory',
+    name: 'AI Memory & Vault',
+    icon: 'Brain',
+    category: 'Intelligence',
+    description: 'Inspect what the AI remembers: facts, decisions, preferences & searchable knowledge base.',
+    defaultWidth: 840,
+    defaultHeight: 560,
+    minWidth: 480,
+    minHeight: 360
+  },
+  appbuilder: {
+    id: 'appbuilder',
+    name: 'App Builder',
+    icon: 'Layers',
+    category: 'Development',
+    description: 'Prompt-to-App generator producing working interactive micro-apps in an isolated sandbox.',
+    defaultWidth: 900,
+    defaultHeight: 620,
+    minWidth: 520,
+    minHeight: 400
+  },
+  vca: {
+    id: 'vca',
+    name: 'VCA Forensic Lab',
+    icon: 'ShieldCheck',
+    category: 'Specialized',
+    description: 'Verified Card Authority: Real camera VScan, 3D interactive slab, counterfeit audit & NFC.',
+    defaultWidth: 980,
+    defaultHeight: 660,
+    minWidth: 580,
+    minHeight: 440
+  },
+  engineering: {
+    id: 'engineering',
+    name: 'Autonomous Engineering Lab',
+    icon: 'Cpu',
+    category: 'Specialized',
+    description: 'Autonomous TCG intelligence lab, open-source technology registry, MCP gateway & benchmark runner.',
+    defaultWidth: 960,
+    defaultHeight: 640,
+    minWidth: 580,
+    minHeight: 440
+  },
+  marketplace: {
+    id: 'marketplace',
+    name: 'Marketplace',
+    icon: 'ShoppingBag',
+    category: 'Specialized',
+    description: 'Discover and install specialized AI agents, automation connectors, and verified slabs.',
+    defaultWidth: 860,
+    defaultHeight: 570,
+    minWidth: 480,
+    minHeight: 360
+  },
+  security: {
+    id: 'security',
+    name: 'Security & Secrets',
+    icon: 'Lock',
+    category: 'System',
+    description: 'Encrypted secrets vault, human-in-the-loop approval rules, and role-based permissions.',
+    defaultWidth: 800,
+    defaultHeight: 540,
+    minWidth: 460,
+    minHeight: 360
+  },
+  activity: {
+    id: 'activity',
+    name: 'System Observability',
+    icon: 'Activity',
+    category: 'System',
+    description: 'Real-time telemetry, audit trails, agent latencies, and checkpoint event logs.',
+    defaultWidth: 840,
+    defaultHeight: 560,
+    minWidth: 480,
+    minHeight: 360
+  },
+  process_manager: {
+    id: 'process_manager',
+    name: 'Process & Port Manager',
+    icon: 'Activity',
+    category: 'System',
+    description: 'Real-time host process supervisor, PID management, port bindings and kill/restart controls.',
+    defaultWidth: 920,
+    defaultHeight: 600,
+    minWidth: 540,
+    minHeight: 400
+  },
+  github_runner: {
+    id: 'github_runner',
+    name: 'GitHub Project Runner',
+    icon: 'FolderGit2',
+    category: 'Development',
+    description: 'One-click clone, project architecture detection, security audit, install & launch host projects.',
+    defaultWidth: 960,
+    defaultHeight: 640,
+    minWidth: 560,
+    minHeight: 420
+  },
+  widget_studio: {
+    id: 'widget_studio',
+    name: 'Widget Studio & Market',
+    icon: 'LayoutGrid',
+    category: 'Intelligence',
+    description: 'Dynamic desktop widgets, AI conversational widget builder, hardware meters and live monitors.',
+    defaultWidth: 900,
+    defaultHeight: 620,
+    minWidth: 520,
+    minHeight: 400
+  },
+  emulator: {
+    id: 'emulator',
+    name: 'Device & OS Emulator',
+    icon: 'Smartphone',
+    category: 'Specialized',
+    description: 'Multi-device emulation lab (Samsung S26 Ultra, Pixel 9 Fold, iPhone 16 Pro, Surface Pro, Linux/Win11) with APK installer & hardware config.',
+    defaultWidth: 1060,
+    defaultHeight: 720,
+    minWidth: 600,
+    minHeight: 450
+  },
+  software_installer: {
+    id: 'software_installer',
+    name: 'Software & APK Installer',
+    icon: 'DownloadCloud',
+    category: 'System',
+    description: '1-Click installer center for Windows 11 Forensics, Linux Ubuntu/Kali containers, Android APKs and computer vision suites.',
+    defaultWidth: 940,
+    defaultHeight: 620,
+    minWidth: 540,
+    minHeight: 400
+  },
+  settings: {
+    id: 'settings',
+    name: 'System Settings',
+    icon: 'Settings',
+    category: 'System',
+    description: 'Personalize wallpaper, model routing policies, audio feedbacks & workspace defaults.',
+    defaultWidth: 780,
+    defaultHeight: 520,
+    minWidth: 450,
+    minHeight: 340
+  }
+};
