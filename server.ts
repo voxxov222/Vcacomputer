@@ -2158,6 +2158,20 @@ Return strictly valid JSON:
     }
   });
 
+  app.get('/api/system/stats', (req, res) => {
+    res.json({
+      stats: {
+        platform: os.platform(),
+        nodeVersion: process.version,
+        ram: {
+          usedMb: Math.round((os.totalmem() - os.freemem()) / 1024 / 1024),
+          totalMb: Math.round(os.totalmem() / 1024 / 1024)
+        },
+        cpuCount: os.cpus().length
+      }
+    });
+  });
+
   app.post('/api/agent/tasks', (req, res) => {
     try {
       const { name, type, intervalMinutes } = req.body;
@@ -2656,6 +2670,24 @@ Return a structured JSON verdict:
     } catch (err: any) {
       res.status(500).json({ error: err.message || 'Pipeline failed' });
     }
+  });
+
+  app.get('/api/mcp/tools', (req, res) => {
+    res.json({
+      tools: [
+        { name: 'psa_cert_lookup', description: 'Lookup PSA certification data' },
+        { name: 'verify_psa_cert', description: 'Verify PSA cert status' },
+        { name: 'search_cards', description: 'Search Pokemon cards by name, set, etc.' },
+        { name: 'get_card_by_id', description: 'Get a specific card by ID' },
+        { name: 'get_card_price', description: 'Get card prices by name/set' },
+        { name: 'search_sets', description: 'Search Pokemon card sets' },
+        { name: 'get_set_by_id', description: 'Get set details by ID' },
+        { name: 'get_types', description: 'List all valid Pokemon types' },
+        { name: 'get_supertypes', description: 'List supertypes (Pokemon, Trainer, Energy)' },
+        { name: 'get_subtypes', description: 'List card subtypes (Basic, V, EX, etc.)' },
+        { name: 'get_rarities', description: 'List card rarities' }
+      ]
+    });
   });
 
   // MCP Tool Gateway - Supports psa-verification-server & pokemon-tcg-mcp (grzetich/pokemon-tcg-mcp)
@@ -3262,34 +3294,104 @@ Return strict JSON:
       if (Object.keys(toolResult.measurements).length === 0) {
         switch (toolId) {
           case 'vca-tool-1':
+          case 'multi_spectrum':
             toolResult.measurements = { dynamicRange: '14.2 stops', histogramSpread: '0.88', contrastRatio: '3200:1' };
             break;
+          case 'vca-tool-2':
+          case 'negative_inversion':
+            toolResult.measurements = { inversionContrast: '2.4x', densityDiscrepancyPct: 0.02, retouchProbabilityPct: 1.2 };
+            break;
+          case 'vca-tool-3':
+          case 'superimpose_overlay':
+            toolResult.measurements = { alignmentOffsetPx: '0.4px', perceptualHashDiff: '0.018', deltaPixelCount: 38 };
+            break;
+          case 'vca-tool-4':
+          case 'xray_structural':
+            toolResult.measurements = { densityUniformity: '99.4%', internalCreaseProb: '0.0%', coreOpacity: '0.98' };
+            break;
+          case 'vca-tool-5':
+          case 'pixel_forensics':
+            toolResult.measurements = { compressionArtifactPct: '0.4%', cloneStampDetected: false, noiseConsistency: '99.1%' };
+            break;
           case 'vca-tool-6':
+          case 'border_measurement':
             toolResult.measurements = { leftBorderMm: 3.1, rightBorderMm: 3.2, topBorderMm: 3.0, bottomBorderMm: 3.3 };
             break;
           case 'vca-tool-7':
+          case 'front_centering':
             toolResult.measurements = { horizontalRatio: '49.2 / 50.8', verticalRatio: '48.5 / 51.5', centeringScore: 9.5 };
             break;
           case 'vca-tool-8':
+          case 'back_centering':
             toolResult.measurements = { backHorizontalRatio: '51.0 / 49.0', backVerticalRatio: '50.5 / 49.5', centeringScore: 9.5 };
             break;
+          case 'vca-tool-9':
+          case 'perspective_correction':
+            toolResult.measurements = { keystoneAngleDeg: 0.18, rotationDeg: 0.05, homographyConfidence: '99.7%' };
+            break;
+          case 'vca-tool-10':
+          case 'geometry_dimensions':
+            toolResult.measurements = { widthMm: 63.1, heightMm: 88.0, cornerRadiusMm: 3.18, standardToleranceMm: 0.08 };
+            break;
           case 'vca-tool-11':
+          case 'corner_inspection':
             toolResult.measurements = { topLeftRadiusMm: 3.18, topRightRadiusMm: 3.18, bottomLeftRadiusMm: 3.17, bottomRightRadiusMm: 3.18, fiberIntegrityPct: 99.2 };
             break;
           case 'vca-tool-12':
+          case 'edge_inspection':
             toolResult.measurements = { edgeRoughnessMicrons: 4.8, edgeBleedDetected: false, cutAngleDeg: 90.1 };
             break;
+          case 'vca-tool-13':
+          case 'edge_profile':
+            toolResult.measurements = { bladeChatterMicrons: 2.1, trimmedIndicator: false, edgeProfileConsistency: '98.9%' };
+            break;
+          case 'vca-tool-14':
+          case 'surface_damage':
+            toolResult.measurements = { scratchCount: 1, maxDepthMicrons: 1.4, dentCount: 0, glossIndex: 94.2 };
+            break;
+          case 'vca-tool-15':
+          case 'gloss_texture':
+            toolResult.measurements = { specularReflectance: '92.4 GU', foilTextureUniformity: '99.3%', coatingIntact: true };
+            break;
           case 'vca-tool-16':
+          case 'print_registration':
             toolResult.measurements = { rosetteFrequencyLpi: 175, cmykMisregistrationMicrons: 12, dotGainPct: 14 };
             break;
           case 'vca-tool-17':
+          case 'typography_font':
             toolResult.measurements = { glyphKerningScore: 99.4, fontWeightMatchPct: 99.1, strokeVectorDelta: 0.04 };
             break;
+          case 'vca-tool-18':
+          case 'ink_density':
+            toolResult.measurements = { cmykDeltaE: 1.1, blackAbsorptionSpectrum: 'Normal', opticalBrighteners: 'Negative' };
+            break;
+          case 'vca-tool-19':
+          case 'holo_foil':
+            toolResult.measurements = { diffractionPitchMicrons: 0.85, starPatternMatch: '100%', foilSeamUniform: true };
+            break;
           case 'vca-tool-20':
+          case 'authenticity_detector':
             toolResult.measurements = { coreStockOpacity: '99.8%', opticalBrightenerUvScore: 'Authentic 0.04', halftoneSignatureMatch: '98.7%' };
             break;
+          case 'vca-tool-21':
+          case 'defect_mapping':
+            toolResult.measurements = { totalDefectsLogged: 2, netDeductionScore: 0.5, auditCompleteness: '100%' };
+            break;
           case 'vca-tool-22':
+          case 'condition_scoring':
             toolResult.measurements = { centering: 9.5, corners: 9.5, edges: 9.0, surface: 9.5, overallWeighted: 9.5 };
+            break;
+          case 'vca-tool-23':
+          case 'reference_analyzer':
+            toolResult.measurements = { referenceSpecimenId: 'REF-SM10-217-GEM', vectorSimilarity: '99.6%', confidence: '99.2%' };
+            break;
+          case 'vca-tool-24':
+          case 'final_report':
+            toolResult.measurements = { overallGrade: 9.5, serialNumber: 'VCA-2026-9042', ledgerSeal: 'SHA256-VALID' };
+            break;
+          case 'vca-tool-25':
+          case 'master_dashboard':
+            toolResult.measurements = { pipelineHealth: 'OPTIMAL', activeToolsCount: 25, verifiedStatus: 'READY' };
             break;
           default:
             toolResult.measurements = { calibratedScore: 98.4, sampleCount: 1024 };
@@ -3316,6 +3418,43 @@ Return strict JSON:
     { id: 'agent-qa', name: 'Testing Engineer', role: 'Automated Test Suites & Verification', avatarIcon: 'CheckCircle', status: 'idle', specialization: 'Vitest, Jest, Pytest, End-to-End validation', color: 'teal' },
     { id: 'agent-db', name: 'Database Architect', role: 'Schemas, Caching & Query Optimization', avatarIcon: 'Database', status: 'idle', specialization: 'PostgreSQL, Redis Streams, Vector search, SQLite', color: 'indigo' }
   ];
+
+  // Engineering/Technology Registry Mock Routes
+  app.post('/api/tech-registry/benchmark', (req, res) => {
+    setTimeout(() => {
+      res.json({
+        success: true,
+        benchmark: {
+          score: Math.floor(Math.random() * 20) + 80,
+          latencyMs: Math.floor(Math.random() * 50) + 10,
+          cpuUsage: Math.floor(Math.random() * 30) + 5,
+          memoryUsageMb: Math.floor(Math.random() * 100) + 50,
+          status: 'PASSED'
+        }
+      });
+    }, 1500);
+  });
+
+  app.post('/api/engineering/run-agent', (req, res) => {
+    setTimeout(() => {
+      res.json({
+        success: true,
+        run: {
+          id: `run-${Date.now()}`,
+          status: 'COMPLETED',
+          objective: req.body.objective,
+          logs: [
+            '[SYSTEM] Agent initialized',
+            '[AGENT] Connecting to repository...',
+            '[AGENT] Scanning architecture...',
+            '[AGENT] Evaluating structural dependencies...',
+            '[AGENT] Identifying refactoring targets...',
+            '[AGENT] Execution completed successfully.'
+          ]
+        }
+      });
+    }, 2500);
+  });
 
   app.get('/api/coding-agents/roster', (req, res) => {
     res.json({ agents: CODING_ROSTER });

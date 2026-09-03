@@ -3,6 +3,7 @@ import { useOS } from '../../context/OSContext';
 import { VCACardRecord, VCASubmission, VCAForensicReport, VCAGradeCriteria, AppId } from '../../types/os';
 import { getCanonicalReferenceImage, findReferenceCardByQuery } from '../../lib/cardReference';
 import { ForensicLabSuite } from '../forensics/ForensicLabSuite';
+import { NfcSlabManager } from '../nfc/NfcSlabManager';
 import {
   ShieldCheck,
   Camera,
@@ -216,7 +217,7 @@ export const VCAApp: React.FC<VCAAppProps> = ({ defaultTab, initialTab, cardId, 
     moveWindowToScreen
   } = useOS();
 
-  const [activeTab, setActiveTab] = useState<'vscan' | 'grading' | 'auth' | 'cert' | 'nfc' | 'pricing' | 'admin' | 'submissions' | 'portfolio' | 'inventory'>(initialTab || defaultTab || 'vscan');
+  const [activeTab, setActiveTab] = useState<'forensics' | 'vscan' | 'grading' | 'auth' | 'cert' | 'nfc' | 'pricing' | 'admin' | 'submissions' | 'portfolio' | 'inventory'>((initialTab as any) || (defaultTab as any) || 'forensics');
   const [selectedCardId, setSelectedCardId] = useState<string>(initialCardId || cardId || (vcaCards[0]?.id || ''));
 
   // Counterfeit / Anomaly testing toggle
@@ -818,8 +819,14 @@ export const VCAApp: React.FC<VCAAppProps> = ({ defaultTab, initialTab, cardId, 
           </div>
 
           {/* Tab Navigation */}
-          <div className="hidden lg:flex items-center gap-1 border-l border-slate-800 pl-3">
+          <div className="flex items-center gap-1 border-l border-slate-800 pl-2 overflow-x-auto no-scrollbar py-0.5">
             {[
+              {
+                id: 'forensics',
+                label: '25 Forensic Tools',
+                icon: Sparkles,
+                badge: `${dynamicTools.filter((t: any) => t.enabled).length || 25}/25`
+              },
               { id: 'vscan', label: 'VScan Camera', icon: Camera },
               { id: 'grading', label: 'Grading Lab', icon: Sliders },
               { id: 'auth', label: 'Forensics & Auth', icon: ShieldCheck },
@@ -835,14 +842,19 @@ export const VCAApp: React.FC<VCAAppProps> = ({ defaultTab, initialTab, cardId, 
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium transition ${
+                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium transition whitespace-nowrap shrink-0 ${
                     activeTab === tab.id
                       ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm shadow-cyan-950/50'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
                   }`}
                 >
-                  <Icon className="w-3.5 h-3.5" />
+                  <Icon className="w-3.5 h-3.5 shrink-0" />
                   <span>{tab.label}</span>
+                  {(tab as any).badge && (
+                    <span className="text-[9px] font-mono px-1 py-0.2 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/30">
+                      {(tab as any).badge}
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -850,9 +862,9 @@ export const VCAApp: React.FC<VCAAppProps> = ({ defaultTab, initialTab, cardId, 
             {/* Launch Autonomous Engineering Lab */}
             <button
               onClick={() => openWindow('engineering')}
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/40 transition ml-1"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/40 transition ml-1 whitespace-nowrap shrink-0"
             >
-              <Cpu className="w-3.5 h-3.5 text-purple-400" />
+              <Cpu className="w-3.5 h-3.5 text-purple-400 shrink-0" />
               <span>Engineering Lab</span>
             </button>
           </div>
@@ -912,6 +924,26 @@ export const VCAApp: React.FC<VCAAppProps> = ({ defaultTab, initialTab, cardId, 
             </div>
           </div>
         )}
+        {/* TAB 0: 25 DYNAMIC FORENSIC TOOLS LABORATORY */}
+        {activeTab === 'forensics' && (
+          <div className="h-[calc(100vh-140px)] min-h-[680px] flex flex-col rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-950">
+            <ForensicLabSuite
+              selectedCard={selectedCard}
+              dynamicTools={dynamicTools}
+              onToggleTool={handleToggleTool}
+              onRefreshTools={loadDynamicTools}
+              onUpdateCard={(updated) => updateVCACard(selectedCard.id, updated)}
+              onGenerateCert={(cert) => {
+                addNotification({
+                  title: 'Certificate Minted',
+                  message: `${cert.serialNumber} (${cert.gradeLabel}) locked in VCA Ledger.`,
+                  type: 'success'
+                });
+              }}
+            />
+          </div>
+        )}
+
         {/* TAB 1: VSCAN CAMERA & SCANNER */}
         {activeTab === 'vscan' && (
           <div className="max-w-5xl mx-auto space-y-6">
@@ -1307,16 +1339,25 @@ export const VCAApp: React.FC<VCAAppProps> = ({ defaultTab, initialTab, cardId, 
                 </p>
               </div>
 
-              {/* Toolbar */}
-              <div className="flex items-center gap-2 bg-slate-900 p-1 rounded-xl border border-slate-800">
+              <div className="flex items-center gap-2">
                 <button
-                  onClick={() => setSelectedTool('inspect')}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-medium transition ${
-                    selectedTool === 'inspect' ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-400 hover:text-white'
-                  }`}
+                  onClick={() => setActiveTab('forensics')}
+                  className="px-3 py-1.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-md shadow-cyan-900/40"
                 >
-                  Inspect
+                  <Sparkles className="w-3.5 h-3.5 text-cyan-200" />
+                  <span>25 Forensic Tools Suite ({dynamicTools.filter((t: any) => t.enabled).length}/25)</span>
                 </button>
+
+                {/* Toolbar */}
+                <div className="flex items-center gap-2 bg-slate-900 p-1 rounded-xl border border-slate-800">
+                  <button
+                    onClick={() => setSelectedTool('inspect')}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-medium transition ${
+                      selectedTool === 'inspect' ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    Inspect
+                  </button>
                 <button
                   onClick={() => setSelectedTool('centering')}
                   className={`px-2.5 py-1 rounded-lg text-xs font-medium transition ${
@@ -1351,6 +1392,7 @@ export const VCAApp: React.FC<VCAAppProps> = ({ defaultTab, initialTab, cardId, 
                 <span className="text-[11px] font-mono text-slate-400 px-1">{Math.round(zoomLevel * 100)}%</span>
               </div>
             </div>
+          </div>
 
             {/* Inspection Stage & Scoring Sheet */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -1689,6 +1731,9 @@ export const VCAApp: React.FC<VCAAppProps> = ({ defaultTab, initialTab, cardId, 
             {forensicViewMode === '25_tools' && (
               <ForensicLabSuite
                 selectedCard={selectedCard}
+                dynamicTools={dynamicTools}
+                onToggleTool={handleToggleTool}
+                onRefreshTools={loadDynamicTools}
                 onUpdateCard={(updated) => updateVCACard(selectedCard.id, updated)}
                 onGenerateCert={(cert) => {
                   addNotification({
@@ -2272,95 +2317,10 @@ export const VCAApp: React.FC<VCAAppProps> = ({ defaultTab, initialTab, cardId, 
 
         {/* TAB 4: NFC CENTER & BINDING */}
         {activeTab === 'nfc' && (
-          <div className="max-w-4xl mx-auto space-y-6">
-            <div className="pb-4 border-b border-slate-800">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Radio className="w-5 h-5 text-cyan-400" />
-                <span>VCA NFC Identity Management Center</span>
-              </h3>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Link physical ISO-14443A cryptographic NFC tags to permanent VCA digital certification records.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* NFC Reader Card */}
-              <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-white text-sm">Physical NFC Tag Reader</span>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">
-                    {nfcSupported ? 'Web NFC Ready' : 'Emulation Mode'}
-                  </span>
-                </div>
-
-                <div className="p-6 bg-slate-950/80 rounded-2xl border border-slate-800/80 flex flex-col items-center justify-center text-center space-y-3">
-                  <div className={`w-20 h-20 rounded-full flex items-center justify-center border-2 transition-all ${
-                    nfcReading ? 'border-cyan-400 bg-cyan-500/20 animate-pulse text-cyan-300 scale-110' : 'border-slate-700 bg-slate-900 text-slate-400'
-                  }`}>
-                    <Radio className="w-10 h-10" />
-                  </div>
-
-                  <div>
-                    <h5 className="font-bold text-white text-sm">
-                      {nfcReading ? 'Scanning for NFC Tag...' : 'Ready to Bind Tag'}
-                    </h5>
-                    <p className="text-xs text-slate-400 max-w-xs mt-1">
-                      Hold the physical VCA slab against the back of your smartphone or USB NFC reader.
-                    </p>
-                  </div>
-
-                  <button
-                    onClick={handleScanNfc}
-                    disabled={nfcReading}
-                    className="px-6 py-2.5 bg-cyan-600 hover:bg-cyan-500 disabled:opacity-50 text-white rounded-xl text-xs font-bold transition shadow-lg shadow-cyan-950/50"
-                  >
-                    {nfcReading ? 'Listening for Tag...' : 'Bind NFC to Active Card'}
-                  </button>
-                </div>
-
-                {nfcBindSuccess && (
-                  <div className="p-3 bg-emerald-950/40 border border-emerald-800/60 rounded-xl flex items-center gap-3 text-xs text-emerald-300">
-                    <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
-                    <div>
-                      <div className="font-bold text-white">NFC Successfully Bound</div>
-                      <div className="font-mono text-[10px] text-emerald-400">UID: {nfcTagId}</div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Bound Record Details */}
-              <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4 text-xs">
-                <span className="font-bold text-white text-sm">Encrypted Identity Pointer</span>
-
-                <div className="space-y-2.5">
-                  <div className="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
-                    <span className="text-slate-400 block text-[10px]">Target Certificate:</span>
-                    <span className="font-mono text-cyan-400 font-bold text-xs">{selectedCard?.certificationNumber}</span>
-                  </div>
-
-                  <div className="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
-                    <span className="text-slate-400 block text-[10px]">Current Bound Tag UID:</span>
-                    <span className="font-mono text-emerald-400 font-bold text-xs">{selectedCard?.nfcId || 'Pending Assignment'}</span>
-                  </div>
-
-                  <div className="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
-                    <span className="text-slate-400 block text-[10px]">Security Signature:</span>
-                    <span className="font-mono text-slate-300 text-[11px] truncate block">
-                      SHA256: 8f4a9b2c3d1e0f6a7b8c9d0e1f2a3b4c5d6e7f8
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-3 bg-cyan-950/30 border border-cyan-800/40 rounded-xl text-cyan-300 text-[11px] leading-relaxed">
-                  <div className="font-bold flex items-center gap-1 mb-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" /> VCA Cryptographic Security
-                  </div>
-                  The physical tag acts as a zero-knowledge pointer to VCA verification servers. Private customer data is never written in plaintext to the chip.
-                </div>
-              </div>
-            </div>
-          </div>
+          <NfcSlabManager 
+            selectedCard={selectedCard}
+            onUpdateCard={(updated) => updateVCACard(selectedCard.id, updated)}
+          />
         )}
 
         {/* TAB 5: PRICE INTELLIGENCE */}
@@ -3197,22 +3157,32 @@ export const VCAApp: React.FC<VCAAppProps> = ({ defaultTab, initialTab, cardId, 
                       </p>
                     </div>
 
-                    <button
-                      onClick={async () => {
-                        try {
-                          const res = await fetch('/api/vca/tools');
-                          const data = await res.json();
-                          setDynamicTools(data.tools || []);
-                          addNotification({ title: 'Tools Synced', message: 'Loaded latest tool definitions from registry.', type: 'info' });
-                        } catch (e: any) {
-                          addNotification({ title: 'Sync Failed', message: e.message, type: 'error' });
-                        }
-                      }}
-                      className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition"
-                    >
-                      <RefreshCw className="w-3.5 h-3.5 text-cyan-400" />
-                      <span>Sync Registry</span>
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setActiveTab('forensics')}
+                        className="px-3.5 py-1.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow"
+                      >
+                        <Sparkles className="w-3.5 h-3.5 text-cyan-200" />
+                        <span>Inspect Active Card</span>
+                      </button>
+
+                      <button
+                        onClick={async () => {
+                          try {
+                            const res = await fetch('/api/vca/tools');
+                            const data = await res.json();
+                            setDynamicTools(data.tools || []);
+                            addNotification({ title: 'Tools Synced', message: 'Loaded latest tool definitions from registry.', type: 'info' });
+                          } catch (e: any) {
+                            addNotification({ title: 'Sync Failed', message: e.message, type: 'error' });
+                          }
+                        }}
+                        className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition"
+                      >
+                        <RefreshCw className="w-3.5 h-3.5 text-cyan-400" />
+                        <span>Sync Registry</span>
+                      </button>
+                    </div>
                   </div>
 
                   {/* Tool Cards Grid */}

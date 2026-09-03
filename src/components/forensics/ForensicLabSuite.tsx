@@ -62,44 +62,52 @@ interface ForensicLabSuiteProps {
   onUpdateCard?: (updated: any) => void;
   onGenerateCert?: (certData: any) => void;
   onSelectCard?: (card: any) => void;
+  dynamicTools?: VcaForensicAgentTool[];
+  onToggleTool?: (toolId: string) => void;
+  onRefreshTools?: () => void;
 }
 
 export const ForensicLabSuite: React.FC<ForensicLabSuiteProps> = ({
   selectedCard,
   onUpdateCard,
-  onGenerateCert
+  onGenerateCert,
+  dynamicTools,
+  onToggleTool,
+  onRefreshTools
 }) => {
   // Navigation & Category Selection
   const [activeCategoryIndex, setActiveCategoryIndex] = useState<1 | 2 | 3 | 4 | 5>(1);
   const [activeToolId, setActiveToolId] = useState<string>('multi_spectrum');
   const [isProcessingAll, setIsProcessingAll] = useState<boolean>(false);
-  const [toolStatuses, setToolStatuses] = useState<Record<string, 'READY' | 'PROCESSING' | 'COMPLETE' | 'LIMITED' | 'REQUIRES_REVIEW'>>({
-    multi_spectrum: 'COMPLETE',
-    negative_inversion: 'COMPLETE',
-    superimpose_overlay: 'COMPLETE',
-    xray_structural: 'COMPLETE',
-    pixel_forensics: 'COMPLETE',
-    border_measurement: 'COMPLETE',
-    front_centering: 'COMPLETE',
-    back_centering: 'COMPLETE',
-    perspective_correction: 'COMPLETE',
-    geometry_dimensions: 'COMPLETE',
-    corner_inspection: 'COMPLETE',
-    edge_inspection: 'COMPLETE',
-    edge_profile: 'COMPLETE',
-    surface_damage: 'COMPLETE',
-    gloss_texture: 'COMPLETE',
-    print_registration: 'COMPLETE',
-    typography_font: 'COMPLETE',
-    ink_density: 'COMPLETE',
-    holo_foil: 'COMPLETE',
-    authenticity_detector: 'COMPLETE',
-    defect_mapping: 'COMPLETE',
-    condition_scoring: 'COMPLETE',
-    reference_analyzer: 'COMPLETE',
-    final_report: 'COMPLETE',
-    master_dashboard: 'COMPLETE'
+  const [showRegistryDrawer, setShowRegistryDrawer] = useState<boolean>(false);
+  const [showOnlyEnabled, setShowOnlyEnabled] = useState<boolean>(false);
+
+  // Dynamic Tools - sync with dynamicTools prop or fallback to VCA_FORENSIC_TOOLS
+  const toolsList = useMemo(() => {
+    if (dynamicTools && dynamicTools.length > 0) return dynamicTools;
+    return VCA_FORENSIC_TOOLS;
+  }, [dynamicTools]);
+
+  const [toolStatuses, setToolStatuses] = useState<Record<string, 'READY' | 'PROCESSING' | 'COMPLETE' | 'LIMITED' | 'REQUIRES_REVIEW'>>(() => {
+    const map: Record<string, any> = {};
+    (dynamicTools && dynamicTools.length > 0 ? dynamicTools : VCA_FORENSIC_TOOLS).forEach(t => {
+      map[t.id] = t.enabled ? 'COMPLETE' : 'LIMITED';
+    });
+    return map;
   });
+
+  // Keep toolStatuses in sync if toolsList updates
+  useEffect(() => {
+    setToolStatuses(prev => {
+      const next = { ...prev };
+      toolsList.forEach(t => {
+        if (!next[t.id]) {
+          next[t.id] = t.enabled ? 'COMPLETE' : 'LIMITED';
+        }
+      });
+      return next;
+    });
+  }, [toolsList]);
 
   // Viewer State
   const [zoomLevel, setZoomLevel] = useState<number>(1);
@@ -211,8 +219,17 @@ export const ForensicLabSuite: React.FC<ForensicLabSuiteProps> = ({
 
   // Active Tool metadata
   const activeTool = useMemo(() => {
-    return VCA_FORENSIC_TOOLS.find((t) => t.id === activeToolId) || VCA_FORENSIC_TOOLS[0];
-  }, [activeToolId]);
+    return toolsList.find((t) => t.id === activeToolId) || toolsList[0] || VCA_FORENSIC_TOOLS[0];
+  }, [toolsList, activeToolId]);
+
+  // Tools for active category
+  const categoryTools = useMemo(() => {
+    let list = toolsList.filter((t) => t.categoryIndex === activeCategoryIndex);
+    if (showOnlyEnabled) {
+      list = list.filter((t) => t.enabled);
+    }
+    return list;
+  }, [toolsList, activeCategoryIndex, showOnlyEnabled]);
 
   // Calculated overall grade based on subgrades
   const overallGradeResult = useMemo(() => {
@@ -253,9 +270,9 @@ export const ForensicLabSuite: React.FC<ForensicLabSuiteProps> = ({
         body: JSON.stringify({
           toolId,
           categoryId: activeTool.category,
-          cardId: currentCard.id,
-          cardName: currentCard.name,
-          imageBase64: currentCard.scans?.front || currentCard.imageUrl
+          cardId: selectedCard?.id || 'SPECIMEN-001',
+          cardName: selectedCard?.name || 'Unknown Specimen',
+          imageBase64: selectedCard?.scans?.front || selectedCard?.imageUrl
         })
       });
       const data = await resp.json();
@@ -420,7 +437,108 @@ export const ForensicLabSuite: React.FC<ForensicLabSuiteProps> = ({
         {/* ------------------------------------------------------------- */}
         {/* LEFT PANEL: The 5x5 Tool Suite (Columns: 3/12) */}
         {/* ------------------------------------------------------------- */}
-        <div className="col-span-3 bg-slate-900/60 border-r border-slate-800 flex flex-col overflow-hidden">
+        <div className="col-span-3 bg-slate-900/60 border-r border-slate-800 flex flex-col overflow-hidden relative">
+          {/* Dynamic Tool Registry Header */}
+          <div className="px-3 py-2 bg-slate-950/90 border-b border-slate-800 flex items-center justify-between shrink-0">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[11px] font-bold text-white tracking-wide">
+                DYNAMIC TOOLS
+              </span>
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/40">
+                {toolsList.filter((t) => t.enabled).length}/{toolsList.length} Active
+              </span>
+            </div>
+
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setShowOnlyEnabled(!showOnlyEnabled)}
+                className={`text-[9px] font-mono px-1.5 py-0.5 rounded border transition ${
+                  showOnlyEnabled
+                    ? 'bg-cyan-950 text-cyan-300 border-cyan-500/50'
+                    : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-slate-200'
+                }`}
+                title={showOnlyEnabled ? 'Showing only enabled tools' : 'Showing all tools'}
+              >
+                {showOnlyEnabled ? 'Active Only' : 'All 25'}
+              </button>
+
+              <button
+                onClick={() => setShowRegistryDrawer(!showRegistryDrawer)}
+                className="text-[9px] font-mono text-cyan-400 hover:text-cyan-200 px-1.5 py-0.5 rounded border border-cyan-500/40 bg-slate-900 hover:bg-slate-800 transition flex items-center gap-1"
+                title="Configure dynamic tools registry"
+              >
+                <Sliders className="w-2.5 h-2.5" />
+                <span>{showRegistryDrawer ? 'Close' : 'Registry'}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Quick Dynamic Registry Drawer Modal if toggled */}
+          {showRegistryDrawer && (
+            <div className="absolute inset-0 z-30 bg-slate-950/95 backdrop-blur-md flex flex-col p-3 border-r border-slate-800 animate-in fade-in duration-150">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-800">
+                <div>
+                  <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Dynamic Tool Registry</span>
+                  </h4>
+                  <p className="text-[10px] text-slate-400">
+                    Live runtime schema & toggle controls ({toolsList.length} registered)
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowRegistryDrawer(false)}
+                  className="p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto py-2 space-y-1.5">
+                {toolsList.map((t) => (
+                  <div
+                    key={t.id}
+                    className={`p-2 rounded-lg border text-xs flex items-center justify-between gap-2 ${
+                      t.enabled
+                        ? 'bg-slate-900/80 border-slate-700 text-slate-200'
+                        : 'bg-slate-950/60 border-rose-950 text-slate-400 opacity-60'
+                    }`}
+                  >
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-mono text-[10px] text-cyan-400 font-bold">
+                          #{String(t.toolNumber).padStart(2, '0')}
+                        </span>
+                        <span className="font-semibold truncate text-slate-200">{t.name}</span>
+                      </div>
+                      <div className="text-[9px] font-mono text-slate-400 flex items-center gap-2 mt-0.5">
+                        <span>v{t.version}</span>
+                        <span>•</span>
+                        <span>{t.permissions}</span>
+                        <span>•</span>
+                        <span className={t.enabled ? 'text-emerald-400' : 'text-rose-400 font-bold'}>
+                          {t.enabled ? 'ENABLED' : 'DISABLED'}
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => onToggleTool && onToggleTool(t.id)}
+                      className={`px-2 py-0.5 rounded font-mono text-[9px] font-bold border transition ${
+                        t.enabled
+                          ? 'bg-emerald-950 text-emerald-300 border-emerald-500/50 hover:bg-rose-950 hover:text-rose-300'
+                          : 'bg-rose-950 text-rose-300 border-rose-500/50 hover:bg-emerald-950 hover:text-emerald-300'
+                      }`}
+                    >
+                      {t.enabled ? 'Disable' : 'Enable'}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Category Tabs */}
           <div className="p-2 border-b border-slate-800 bg-slate-900/90 flex gap-1 overflow-x-auto shrink-0">
             {VCA_TOOL_CATEGORIES.map((cat) => {
@@ -430,7 +548,7 @@ export const ForensicLabSuite: React.FC<ForensicLabSuiteProps> = ({
                   key={cat.id}
                   onClick={() => {
                     setActiveCategoryIndex(cat.categoryIndex);
-                    const catTools = getToolsByCategoryIndex(cat.categoryIndex);
+                    const catTools = toolsList.filter((t) => t.categoryIndex === cat.categoryIndex);
                     if (catTools.length > 0) {
                       setActiveToolId(catTools[0].id);
                     }
@@ -468,7 +586,7 @@ export const ForensicLabSuite: React.FC<ForensicLabSuiteProps> = ({
 
           {/* Tools List for Active Category */}
           <div className="flex-1 overflow-y-auto p-2 space-y-1.5">
-            {getToolsByCategoryIndex(activeCategoryIndex).map((tool) => {
+            {categoryTools.map((tool) => {
               const isSelected = activeToolId === tool.id;
               const status = toolStatuses[tool.id] || 'READY';
 
@@ -479,14 +597,18 @@ export const ForensicLabSuite: React.FC<ForensicLabSuiteProps> = ({
                   className={`w-full text-left p-2.5 rounded-xl border transition flex items-start gap-2.5 ${
                     isSelected
                       ? 'bg-slate-800/90 border-cyan-500/60 text-white shadow-md shadow-cyan-950/30'
-                      : 'bg-slate-900/40 border-slate-800 text-slate-300 hover:bg-slate-800/50 hover:border-slate-700'
+                      : tool.enabled
+                      ? 'bg-slate-900/40 border-slate-800 text-slate-300 hover:bg-slate-800/50 hover:border-slate-700'
+                      : 'bg-slate-950/30 border-slate-900 text-slate-500 opacity-60'
                   }`}
                 >
                   <div
                     className={`w-6 h-6 rounded-lg flex items-center justify-center font-mono text-[11px] font-bold shrink-0 mt-0.5 ${
                       isSelected
                         ? 'bg-cyan-500 text-slate-950'
-                        : 'bg-slate-800 text-slate-400 border border-slate-700'
+                        : tool.enabled
+                        ? 'bg-slate-800 text-slate-400 border border-slate-700'
+                        : 'bg-slate-900 text-slate-600 border border-slate-800'
                     }`}
                   >
                     {String(tool.toolNumber).padStart(2, '0')}
@@ -497,17 +619,24 @@ export const ForensicLabSuite: React.FC<ForensicLabSuiteProps> = ({
                       <span className="text-xs font-semibold truncate text-slate-100">
                         {tool.name}
                       </span>
-                      <span
-                        className={`text-[8px] font-mono px-1.5 py-0.2 rounded border ${
-                          status === 'COMPLETE'
-                            ? 'bg-emerald-950/80 text-emerald-400 border-emerald-500/40'
-                            : status === 'PROCESSING'
-                            ? 'bg-amber-950/80 text-amber-400 border-amber-500/40 animate-pulse'
-                            : 'bg-slate-800 text-slate-400 border-slate-700'
-                        }`}
-                      >
-                        {status}
-                      </span>
+                      <div className="flex items-center gap-1 shrink-0">
+                        {!tool.enabled && (
+                          <span className="text-[8px] font-mono px-1 py-0.2 rounded bg-rose-950/80 text-rose-400 border border-rose-500/40">
+                            DISABLED
+                          </span>
+                        )}
+                        <span
+                          className={`text-[8px] font-mono px-1.5 py-0.2 rounded border ${
+                            status === 'COMPLETE'
+                              ? 'bg-emerald-950/80 text-emerald-400 border-emerald-500/40'
+                              : status === 'PROCESSING'
+                              ? 'bg-amber-950/80 text-amber-400 border-amber-500/40 animate-pulse'
+                              : 'bg-slate-800 text-slate-400 border-slate-700'
+                          }`}
+                        >
+                          {status}
+                        </span>
+                      </div>
                     </div>
 
                     <p className="text-[10px] text-slate-400 line-clamp-1 mt-0.5">
@@ -838,21 +967,83 @@ export const ForensicLabSuite: React.FC<ForensicLabSuiteProps> = ({
           {/* Active Tool Header */}
           <div className="p-3 bg-slate-950/80 border-b border-slate-800 shrink-0">
             <div className="flex items-center justify-between">
-              <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/40">
-                TOOL #{activeTool.toolNumber} • {activeTool.category}
-              </span>
-              <button
-                onClick={() => handleRunTool(activeTool.id)}
-                className="px-2 py-1 bg-cyan-600 hover:bg-cyan-500 text-white rounded text-[10px] font-semibold flex items-center gap-1 transition"
-              >
-                <RefreshCw className="w-2.5 h-2.5" />
-                <span>Execute</span>
-              </button>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/40">
+                  TOOL #{String(activeTool.toolNumber).padStart(2, '0')} • {activeTool.category}
+                </span>
+                <span
+                  className={`text-[8px] font-mono px-1.5 py-0.2 rounded border ${
+                    activeTool.enabled
+                      ? 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40'
+                      : 'bg-rose-950/80 text-rose-300 border-rose-500/40'
+                  }`}
+                >
+                  {activeTool.enabled ? 'ACTIVE' : 'DISABLED'}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                {onToggleTool && (
+                  <button
+                    onClick={() => onToggleTool(activeTool.id)}
+                    className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold border transition ${
+                      activeTool.enabled
+                        ? 'bg-slate-900 hover:bg-rose-950/80 text-slate-300 hover:text-rose-300 border-slate-700'
+                        : 'bg-emerald-950 text-emerald-300 border-emerald-500/50 hover:bg-emerald-900'
+                    }`}
+                    title={activeTool.enabled ? 'Disable this tool in dynamic registry' : 'Enable this tool'}
+                  >
+                    {activeTool.enabled ? 'Disable' : 'Enable'}
+                  </button>
+                )}
+
+                <button
+                  onClick={() => handleRunTool(activeTool.id)}
+                  disabled={!activeTool.enabled}
+                  className="px-2 py-1 bg-cyan-600 hover:bg-cyan-500 disabled:opacity-40 disabled:hover:bg-cyan-600 text-white rounded text-[10px] font-semibold flex items-center gap-1 transition shadow"
+                >
+                  <RefreshCw className="w-2.5 h-2.5" />
+                  <span>Execute</span>
+                </button>
+              </div>
             </div>
+
             <h3 className="font-bold text-sm text-white mt-1.5">{activeTool.name}</h3>
             <p className="text-[10px] text-slate-400 mt-0.5 leading-snug">
               {activeTool.description}
             </p>
+
+            {/* Dynamic Registry Specs Tag bar */}
+            <div className="mt-2 pt-2 border-t border-slate-900 flex flex-wrap items-center gap-1.5 text-[9px] font-mono text-slate-400">
+              <span className="bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800 text-slate-300">
+                id: <strong className="text-cyan-400">{activeTool.id}</strong>
+              </span>
+              <span className="bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800 text-slate-300">
+                v{activeTool.version}
+              </span>
+              <span className="bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800 text-slate-300">
+                {activeTool.permissions}
+              </span>
+              {activeTool.isAiCallable && (
+                <span className="bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-500/30 text-cyan-300">
+                  AI-CALLABLE
+                </span>
+              )}
+            </div>
+
+            {!activeTool.enabled && (
+              <div className="mt-2 p-1.5 bg-rose-950/40 border border-rose-500/30 rounded text-[10px] text-rose-300 flex items-center justify-between">
+                <span>Tool disabled in dynamic registry.</span>
+                {onToggleTool && (
+                  <button
+                    onClick={() => onToggleTool(activeTool.id)}
+                    className="underline hover:text-white font-bold"
+                  >
+                    Enable Now
+                  </button>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Scrollable Tool Workspace Body */}

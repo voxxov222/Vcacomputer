@@ -467,7 +467,9 @@ export const BrowserApp: React.FC<BrowserAppProps> = ({ initialUrl }) => {
       } else if (cmd.startsWith('var.') || cmd.startsWith('runtime.')) {
         resultText = '{"runtime": "webcontainer", "adapters": ["local", "docker", "remote_worker"], "status": "nominal"}';
       } else {
-        resultText = String(eval(cmd));
+        // Sandboxed console: we never eval() arbitrary user input here for
+        // security reasons. Unknown commands get a simulated response.
+        resultText = `undefined`;
       }
     } catch (err: any) {
       setConsoleLogs((prev) => [

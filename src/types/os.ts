@@ -122,6 +122,7 @@ export interface OSWindow {
   isMinimized: boolean;
   isMaximized: boolean;
   isFocused: boolean;
+  isLocked?: boolean;
   opacity?: number;
   prevBounds?: { x: number; y: number; width: number; height: number; isMaximized?: boolean };
   initialData?: any;

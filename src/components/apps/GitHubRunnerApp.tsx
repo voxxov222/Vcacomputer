@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { runtimeApi } from '../../lib/runtimeApi';
 import { ProjectDetectionResult, GitHubProjectRunPlan } from '../../types/runtime';
 import {
-  Github,
+  GitBranch as Github,
   Play,
   Terminal,
   ShieldCheck,

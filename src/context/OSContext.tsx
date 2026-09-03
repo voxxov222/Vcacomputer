@@ -50,7 +50,7 @@ interface OSContextType {
   bringForward: (id: string) => void;
   sendBackward: (id: string) => void;
   setWindowOpacity: (id: string, opacity: number) => void;
-  updateWindowBounds: (id: string, bounds: { x: number; y: number; width: number; height: number; isMaximized?: boolean }) => void;
+  updateWindowBounds: (id: string, bounds: { x: number; y: number; width: number; height: number; isMaximized?: boolean; isLocked?: boolean }) => void;
   snapWindow: (id: string, quadrant: 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'maximize') => void;
   centerWindow: (id: string) => void;
   moveWindowBy: (id: string, dx: number, dy: number) => void;
@@ -865,7 +865,7 @@ export const OSProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     setWindows((prev) => prev.map((w) => (w.id === id ? { ...w, opacity: clamped } : w)));
   }, []);
 
-  const updateWindowBounds = useCallback((id: string, bounds: { x: number; y: number; width: number; height: number; isMaximized?: boolean }) => {
+  const updateWindowBounds = useCallback((id: string, bounds: { x: number; y: number; width: number; height: number; isMaximized?: boolean; isLocked?: boolean }) => {
     setWindows((prev) => prev.map((w) => (w.id === id ? { ...w, ...bounds, isMaximized: bounds.isMaximized ?? false } : w)));
   }, []);
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Bot,
-  Github,
+  GitBranch as Github,
   Wrench,
   Cpu,
   Boxes,

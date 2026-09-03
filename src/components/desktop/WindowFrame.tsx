@@ -25,6 +25,7 @@ import {
   ShieldCheck,
   ShoppingBag,
   Lock,
+  Unlock,
   Activity,
   Cpu,
   Settings,
@@ -164,7 +165,7 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({ window: win, children 
   // Multi-Touch Pinch-to-Zoom Gesture on Window
   useEffect(() => {
     const el = windowRef.current;
-    if (!el) return;
+    if (!el || win.isLocked) return;
 
     const getDistance = (t1: Touch, t2: Touch) => {
       return Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
@@ -248,7 +249,7 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({ window: win, children 
   // Trackpad Pinch-to-Zoom (Ctrl + Wheel) on Window
   useEffect(() => {
     const el = windowRef.current;
-    if (!el) return;
+    if (!el || win.isLocked) return;
 
     const handleWheel = (e: WheelEvent) => {
       if (e.ctrlKey) {
@@ -286,7 +287,7 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({ window: win, children 
 
   // Keyboard Arrow Key Window Moving (Alt + Arrow or Shift + Arrow)
   useEffect(() => {
-    if (!win.isFocused || win.isMinimized) return;
+    if (!win.isFocused || win.isMinimized || win.isLocked) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
@@ -527,6 +528,7 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({ window: win, children 
   }, [activeResizeDir, win.id, updateWindowBounds]);
 
   const startResize = (e: React.MouseEvent | React.TouchEvent, dir: ResizeDirection) => {
+    if (win.isLocked) return;
     e.stopPropagation();
     focusWindow(win.id);
     setActiveResizeDir(dir);
@@ -546,6 +548,7 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({ window: win, children 
   };
 
   const startDrag = (clientX: number, clientY: number) => {
+    if (win.isLocked) return;
     focusWindow(win.id);
     setIsDragging(true);
 
@@ -781,6 +784,38 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({ window: win, children 
                 <Minimize2 className="w-2.5 h-2.5 opacity-70 hover:opacity-100 transition-opacity" />
               ) : (
                 <Maximize2 className="w-2.5 h-2.5 opacity-70 hover:opacity-100 transition-opacity" />
+              )}
+            </button>
+
+            {/* Lock Window */}
+            <button
+              id={`win-lock-${win.id}`}
+              onMouseDown={(e) => e.stopPropagation()}
+              onPointerDown={(e) => e.stopPropagation()}
+              onTouchStart={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                updateWindowBounds(win.id, {
+                  x: win.x,
+                  y: win.y,
+                  width: win.width,
+                  height: win.height,
+                  isMaximized: win.isMaximized,
+                  isLocked: !win.isLocked
+                });
+              }}
+              className={`w-3.5 h-3.5 rounded-full ${
+                win.isLocked
+                  ? 'bg-gradient-to-br from-green-400 to-green-600 border border-green-300 text-green-950 shadow-green-950/60'
+                  : 'bg-gradient-to-br from-red-400 to-red-600 border border-red-400 text-red-950 shadow-red-950/60'
+              } active:scale-90 flex items-center justify-center hover:text-black shadow-sm transition cursor-pointer`}
+              title={win.isLocked ? 'Unlock Window' : 'Lock Window'}
+            >
+              {win.isLocked ? (
+                <Lock className="w-2 h-2 opacity-80 hover:opacity-100 transition-opacity drop-shadow-sm" />
+              ) : (
+                <Unlock className="w-2 h-2 opacity-80 hover:opacity-100 transition-opacity drop-shadow-sm" />
               )}
             </button>
           </div>
@@ -1201,7 +1236,7 @@ export const WindowFrame: React.FC<WindowFrameProps> = ({ window: win, children 
       </div>
 
       {/* --- 8-WAY CORNER & EDGE RESIZE HANDLERS --- */}
-      {!win.isMaximized && (
+      {!win.isMaximized && !win.isLocked && (
         <>
           {/* Top Edge */}
           <div
