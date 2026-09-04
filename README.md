@@ -25,7 +25,7 @@
 
 ### 🛡️ Verified Card Authority — Holographic Slab
 
-![VCA Card Slab](grok_1788538080966.jpg)
+![VCA Card Slab](./assets/vca-card-slab.jpg)
 
 ---
 
