@@ -8,6 +8,7 @@ import { VaultCard } from '../../lib/firebase';
 import { useAuth } from '../../context/AuthContext';
 import { VARIANT_TAXONOMY } from '../../../server_scanner_api';
 import { CardDetailModal } from './CardDetailModal';
+import { InteractiveCard } from '../cards/InteractiveCard';
 
 interface VaultGridProps {
   onOpenScanner: () => void;
@@ -275,22 +276,25 @@ export const VaultGrid: React.FC<VaultGridProps> = ({ onOpenScanner, onInspect3D
               >
                 {/* Artwork Frame */}
                 <div className="aspect-[2.5/3.5] rounded-xl overflow-hidden bg-slate-950 border border-slate-800 relative group-hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition">
-                  <img
-                    src={card.imageUrl}
-                    alt={card.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://images.pokemontcg.io/base1/4_hires.png";
-                    }}
+                  <InteractiveCard
+                    frontImage={card.imageUrl}
+                    backImage="https://images.pokemontcg.io/base1/back.png"
+                    name={card.name}
+                    set={card.set}
+                    cardNumber={card.cardNumber}
+                    variant={card.variant || 'Normal'}
+                    holoPattern={card.variant?.toLowerCase().includes('cosmos') ? 'cosmos' : card.variant?.toLowerCase().includes('gold') ? 'gold' : card.variant?.toLowerCase().includes('reverse') ? 'reverse_holo' : 'classic'}
+                    showBadges={false}
+                    className="w-full h-full"
                   />
 
                   {/* Language Chip */}
-                  <div className="absolute top-1.5 left-1.5 bg-black/80 backdrop-blur px-1.5 py-0.5 rounded text-[9px] font-mono font-bold text-cyan-300 border border-slate-700">
+                  <div className="absolute top-1.5 left-1.5 z-20 bg-black/80 backdrop-blur px-1.5 py-0.5 rounded text-[9px] font-mono font-bold text-cyan-300 border border-slate-700 pointer-events-none">
                     {card.language || 'EN'}
                   </div>
 
                   {/* Variant Chip */}
-                  <div className="absolute top-1.5 right-1.5 bg-slate-950/90 backdrop-blur px-1.5 py-0.5 rounded text-[9px] font-mono font-bold text-amber-300 border border-amber-500/40">
+                  <div className="absolute top-1.5 right-1.5 z-20 bg-slate-950/90 backdrop-blur px-1.5 py-0.5 rounded text-[9px] font-mono font-bold text-amber-300 border border-amber-500/40 pointer-events-none">
                     {card.variant || 'Normal'}
                   </div>
                 </div>

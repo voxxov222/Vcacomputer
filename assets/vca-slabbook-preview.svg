@@ -1,0 +1,345 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 980" width="100%" height="100%" style="background:#070b14; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#070c18"/>
+      <stop offset="50%" stop-color="#0b1122"/>
+      <stop offset="100%" stop-color="#050811"/>
+    </linearGradient>
+
+    <linearGradient id="ossnRedPill" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e11d48"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+
+    <linearGradient id="pinnedBanner" x1="0" y1="0" x2="1" y2="0.8">
+      <stop offset="0%" stop-color="#e11d48"/>
+      <stop offset="50%" stop-color="#9333ea"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+
+    <linearGradient id="slabGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <filter id="winShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.85"/>
+    </filter>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background Wallpaper -->
+  <rect width="1200" height="980" fill="url(#bgGrad)"/>
+
+  <!-- Desktop Top OS Bar -->
+  <rect x="0" y="0" width="1200" height="34" fill="#0f172a" fill-opacity="0.95" stroke="#1e293b" stroke-width="1"/>
+  <rect x="12" y="5" width="85" height="24" rx="6" fill="#0284c7" fill-opacity="0.3" stroke="#0ea5e9" stroke-width="1"/>
+  <text x="24" y="21" fill="#38bdf8" font-size="11" font-weight="bold">Main Lab</text>
+
+  <rect x="105" y="5" width="165" height="24" rx="6" fill="#1e293b" opacity="0.6"/>
+  <text x="116" y="21" fill="#94a3b8" font-size="11">📱 Android S26 Emulation</text>
+
+  <rect x="278" y="5" width="150" height="24" rx="6" fill="#1e293b" opacity="0.6"/>
+  <text x="289" y="21" fill="#94a3b8" font-size="11">🗂️ Card Forensic Matrix</text>
+
+  <rect x="436" y="5" width="120" height="24" rx="6" fill="#1e293b" opacity="0.6"/>
+  <text x="447" y="21" fill="#94a3b8" font-size="11">💻 Software &amp; Dev</text>
+
+  <!-- ================================================================= -->
+  <!-- SLABBOOK WINDOW CONTAINER -->
+  <!-- ================================================================= -->
+  <g transform="translate(30, 48)" filter="url(#winShadow)">
+    <!-- Outer Window Frame -->
+    <rect width="1140" height="910" rx="14" fill="#090e1c" stroke="#1e293b" stroke-width="1.2"/>
+    <rect width="1140" height="910" rx="14" fill="none" stroke="#e11d48" stroke-width="0.8" opacity="0.3"/>
+
+    <!-- Window Title Bar -->
+    <rect x="0" y="0" width="1140" height="38" rx="14 14 0 0" fill="#0c1326" stroke="#1e293b" stroke-width="1"/>
+    <!-- Traffic Lights -->
+    <circle cx="22" cy="19" r="6" fill="#ef4444"/>
+    <circle cx="38" cy="19" r="6" fill="#f59e0b"/>
+    <circle cx="54" cy="19" r="6" fill="#10b981"/>
+
+    <text x="80" y="23" fill="#64748b" font-size="11">Front | Back</text>
+    <text x="180" y="23" fill="#e2e8f0" font-size="12" font-weight="bold">⬡ SlabBook — Social Network</text>
+    <text x="960" y="23" fill="#64748b" font-size="11">100%</text>
+    <rect x="1005" y="10" width="45" height="18" rx="4" fill="#1e293b"/>
+    <text x="1015" y="23" fill="#94a3b8" font-size="10">⚙️</text>
+    <text x="1035" y="23" fill="#94a3b8" font-size="10">⊡</text>
+
+    <!-- =============================================================== -->
+    <!-- SLABBOOK APP HEADER BAR -->
+    <!-- =============================================================== -->
+    <g transform="translate(0, 38)">
+      <rect width="1140" height="54" fill="#080c18" stroke="#1e293b" stroke-width="1"/>
+
+      <!-- Brand Logo Pill -->
+      <g transform="translate(20, 10)">
+        <rect width="165" height="34" rx="8" fill="url(#ossnRedPill)" filter="url(#softGlow)"/>
+        <text x="12" y="22" fill="#ffffff" font-size="14" font-weight="900" letter-spacing="0.5">SLABBOOK</text>
+        <rect x="105" y="7" width="48" height="20" rx="4" fill="#000000" fill-opacity="0.4"/>
+        <text x="110" y="21" fill="#fde047" font-size="9" font-weight="bold">OSSN v6.8</text>
+      </g>
+      <text x="200" y="32" fill="#64748b" font-size="10">Pokémon Kanto League PokéBall</text>
+
+      <!-- Global Search Input -->
+      <g transform="translate(390, 10)">
+        <rect width="360" height="34" rx="8" fill="#0f172a" stroke="#334155" stroke-width="0.8"/>
+        <text x="14" y="22" fill="#64748b" font-size="12">🔍 Search cards, slabs, collectors...</text>
+      </g>
+
+      <!-- Top Action Nav -->
+      <g transform="translate(775, 10)">
+        <rect width="70" height="34" rx="8" fill="#e2e8f0"/>
+        <text x="14" y="22" fill="#090e1c" font-size="11" font-weight="bold">📰 Feed</text>
+
+        <g transform="translate(80, 0)">
+          <rect width="125" height="34" rx="8" fill="#0f172a" stroke="#334155" stroke-width="0.8"/>
+          <text x="14" y="22" fill="#cbd5e1" font-size="11" font-weight="600">🛡️ Admin Panel</text>
+        </g>
+
+        <g transform="translate(215, 0)">
+          <rect width="105" height="34" rx="8" fill="#0f172a" stroke="#334155" stroke-width="0.8"/>
+          <text x="14" y="22" fill="#cbd5e1" font-size="11" font-weight="600">💎 Vault Slabs</text>
+        </g>
+
+        <g transform="translate(330, 0)">
+          <rect width="25" height="34" rx="6" fill="#0f172a" stroke="#334155" stroke-width="0.8"/>
+          <text x="6" y="22" fill="#cbd5e1" font-size="11">🎨</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- =============================================================== -->
+    <!-- MAIN WORKSPACE LAYOUT (SIDEBAR + FEED) -->
+    <!-- =============================================================== -->
+    <g transform="translate(0, 92)">
+      <!-- LEFT SIDEBAR -->
+      <g transform="translate(0, 0)">
+        <rect width="260" height="780" fill="#090e1d" stroke="#1e293b" stroke-width="1"/>
+
+        <!-- Explorer Navigation -->
+        <text x="20" y="32" fill="#475569" font-size="10" font-weight="bold" letter-spacing="0.8">EXPLORER</text>
+
+        <!-- Active Wall Link -->
+        <g transform="translate(14, 45)">
+          <rect width="232" height="34" rx="8" fill="#0284c7" fill-opacity="0.25" stroke="#0ea5e9" stroke-width="1"/>
+          <text x="14" y="22" fill="#38bdf8" font-size="11" font-weight="bold">🌐 Main Collector Wall</text>
+        </g>
+
+        <g transform="translate(14, 88)">
+          <rect width="232" height="34" rx="8" fill="transparent"/>
+          <text x="14" y="22" fill="#94a3b8" font-size="11">🛡️ VCA Certified Slabs</text>
+        </g>
+
+        <g transform="translate(14, 131)">
+          <rect width="232" height="34" rx="8" fill="transparent"/>
+          <text x="14" y="22" fill="#94a3b8" font-size="11">⚙️ OSSN Admin Panel</text>
+        </g>
+
+        <!-- Current Theme Box -->
+        <text x="20" y="200" fill="#475569" font-size="10" font-weight="bold" letter-spacing="0.8">CURRENT THEME</text>
+        <g transform="translate(14, 212)">
+          <rect width="232" height="70" rx="8" fill="#060a14" stroke="#1e293b" stroke-width="1"/>
+          <text x="12" y="22" fill="#ffffff" font-size="11" font-weight="bold">Pokémon Kanto League</text>
+          <text x="12" y="38" fill="#64748b" font-size="9">PokéBall scarlet &amp; indigo slate</text>
+          <rect x="12" y="46" width="60" height="16" rx="4" fill="#e11d48"/>
+          <rect x="76" y="46" width="60" height="16" rx="4" fill="#ffffff"/>
+          <rect x="140" y="46" width="60" height="16" rx="4" fill="#0f172a"/>
+        </g>
+
+        <!-- Collector Guilds -->
+        <text x="20" y="325" fill="#475569" font-size="10" font-weight="bold" letter-spacing="0.8">COLLECTOR GUILDS</text>
+        
+        <g transform="translate(14, 340)">
+          <circle cx="16" cy="16" r="12" fill="#b91c1c"/>
+          <text x="11" y="20" fill="#ffffff" font-size="10">🔥</text>
+          <text x="36" y="16" fill="#e2e8f0" font-size="11" font-weight="bold">Vintage WOTC Grails</text>
+          <text x="36" y="28" fill="#64748b" font-size="9">1,420 members</text>
+        </g>
+
+        <g transform="translate(14, 385)">
+          <circle cx="16" cy="16" r="12" fill="#0369a1"/>
+          <text x="11" y="20" fill="#ffffff" font-size="10">💎</text>
+          <text x="36" y="16" fill="#e2e8f0" font-size="11" font-weight="bold">VCA Gem Mint 10 Club</text>
+          <text x="36" y="28" fill="#64748b" font-size="9">850 members</text>
+        </g>
+
+        <g transform="translate(14, 430)">
+          <circle cx="16" cy="16" r="12" fill="#047857"/>
+          <text x="11" y="20" fill="#ffffff" font-size="10">🐉</text>
+          <text x="36" y="16" fill="#e2e8f0" font-size="11" font-weight="bold">Rayquaza &amp; High-End Ex</text>
+          <text x="36" y="28" fill="#64748b" font-size="9">2,190 members</text>
+        </g>
+      </g>
+
+      <!-- ============================================================= -->
+      <!-- FEED / WALL STREAM (RIGHT AREA) -->
+      <!-- ============================================================= -->
+      <g transform="translate(280, 0)">
+        <!-- Sync Announcement Banner -->
+        <g transform="translate(0, 15)">
+          <rect width="830" height="38" rx="8" fill="#7f1d1d" fill-opacity="0.3" stroke="#e11d48" stroke-width="1"/>
+          <text x="20" y="24" fill="#fecdd3" font-size="11" font-weight="bold">📢 VCA Forensic Grading Submissions now sync live with SlabBook portfolio &amp; feed!</text>
+          <rect x="740" y="9" width="70" height="20" rx="4" fill="#e11d48"/>
+          <text x="752" y="23" fill="#ffffff" font-size="9" font-weight="bold">OFFICIAL</text>
+        </g>
+
+        <!-- Post Creation Card -->
+        <g transform="translate(0, 68)">
+          <rect width="830" height="110" rx="10" fill="#0c1224" stroke="#1e293b" stroke-width="1"/>
+          <text x="18" y="22" fill="#64748b" font-size="10" font-weight="bold">📢 POST TO SLABBOOK</text>
+
+          <circle cx="36" cy="55" r="16" fill="#38bdf8"/>
+          <rect x="62" y="38" width="748" height="34" rx="6" fill="#070a14" stroke="#1e293b" stroke-width="0.8"/>
+          <text x="76" y="60" fill="#64748b" font-size="11">What's on your mind? Share a slab, grail, or mailday...</text>
+
+          <!-- Composer action buttons -->
+          <g transform="translate(62, 80)">
+            <rect width="90" height="22" rx="4" fill="#0f172a" stroke="#334155" stroke-width="0.6"/>
+            <text x="10" y="15" fill="#fde047" font-size="9" font-weight="bold">💎 Attach Slab</text>
+
+            <rect x="100" width="90" height="22" rx="4" fill="#0f172a" stroke="#334155" stroke-width="0.6"/>
+            <text x="110" y="15" fill="#c084fc" font-size="9" font-weight="bold">🎨 Background</text>
+
+            <rect x="200" width="26" height="22" rx="4" fill="#0f172a"/>
+            <text x="208" y="15" fill="#38bdf8" font-size="10">📍</text>
+
+            <rect x="235" width="26" height="22" rx="4" fill="#0f172a"/>
+            <text x="242" y="15" fill="#f59e0b" font-size="10">😀</text>
+
+            <rect x="270" width="26" height="22" rx="4" fill="#0f172a"/>
+            <text x="278" y="15" fill="#10b981" font-size="10">⚡</text>
+
+            <!-- Privacy & Post Button -->
+            <rect x="610" width="70" height="22" rx="4" fill="#0f172a" stroke="#334155" stroke-width="0.6"/>
+            <text x="618" y="15" fill="#94a3b8" font-size="9">🌐 Public</text>
+
+            <rect x="690" width="60" height="22" rx="4" fill="#e11d48"/>
+            <text x="704" y="15" fill="#ffffff" font-size="9" font-weight="bold">🚀 Post</text>
+          </g>
+        </g>
+
+        <!-- =========================================================== -->
+        <!-- PINNED WELCOME POST -->
+        <!-- =========================================================== -->
+        <g transform="translate(0, 195)">
+          <rect width="830" height="235" rx="12" fill="#0c1224" stroke="#1e293b" stroke-width="1"/>
+
+          <!-- Author Header -->
+          <circle cx="34" cy="30" r="16" fill="#3b82f6"/>
+          <text x="60" y="26" fill="#ffffff" font-size="12" font-weight="bold">VCA Lead Inspector</text>
+          <rect x="180" y="14" width="130" height="18" rx="4" fill="#7f1d1d" stroke="#ef4444" stroke-width="0.8"/>
+          <text x="188" y="27" fill="#fca5a5" font-size="9" font-weight="bold">System Administrator 🛡️</text>
+
+          <rect x="740" y="14" width="70" height="18" rx="4" fill="#0369a1" fill-opacity="0.4"/>
+          <text x="750" y="27" fill="#38bdf8" font-size="9" font-weight="bold">📌 Pinned</text>
+
+          <text x="60" y="44" fill="#64748b" font-size="10">5 hours ago · 🌐 Public · 📍 VCA High-Security Vault, NY · celebrating milestone 🌟</text>
+
+          <!-- Grand Colored Announcement Banner -->
+          <g transform="translate(20, 60)">
+            <rect width="790" height="120" rx="10" fill="url(#pinnedBanner)" filter="url(#softGlow)"/>
+            <text x="25" y="45" fill="#ffffff" font-size="15" font-weight="900" letter-spacing="0.4">⚡ Welcome to SLABBOOK — The Open Source Social Network for Card Collectors!</text>
+            <text x="25" y="75" fill="#f1f5f9" font-size="12" font-weight="600">Connected directly to the VCA Forensic Lab, NFC Registry, and Real-time Pricing Engine.</text>
+            <text x="25" y="95" fill="#f1f5f9" font-size="12" font-weight="600">Share your slabs, trade grails, and inspect tamper-proof certificates!</text>
+          </g>
+
+          <!-- Post Footer -->
+          <g transform="translate(25, 202)">
+            <text x="0" y="14" fill="#f59e0b" font-size="11">🔥 🏆 42 reactions</text>
+            <text x="120" y="14" fill="#94a3b8" font-size="11">4 comments</text>
+            <text x="680" y="14" fill="#38bdf8" font-size="11">🔥 Hyped</text>
+            <text x="745" y="14" fill="#94a3b8" font-size="11">💬 Comment</text>
+          </g>
+        </g>
+
+        <!-- =========================================================== -->
+        <!-- SECOND POST: CHARIZARD 1ST EDITION SLAB SHOWCASE -->
+        <!-- =========================================================== -->
+        <g transform="translate(0, 445)">
+          <rect width="830" height="315" rx="12" fill="#0c1224" stroke="#1e293b" stroke-width="1"/>
+
+          <!-- Author Header -->
+          <circle cx="34" cy="30" r="16" fill="#ef4444"/>
+          <text x="60" y="26" fill="#ffffff" font-size="12" font-weight="bold">Red from Pallet Town</text>
+          <rect x="195" y="14" width="130" height="18" rx="4" fill="#854d0e" stroke="#eab308" stroke-width="0.8"/>
+          <text x="204" y="27" fill="#fef08a" font-size="9" font-weight="bold">Champion Collector 🏆</text>
+          <text x="60" y="44" fill="#64748b" font-size="10">3 hours ago · 🌐 Public · 📍 Pallet Town HQ · feeling hyped 🚀</text>
+
+          <!-- Post Description Text -->
+          <text x="24" y="75" fill="#e2e8f0" font-size="11.5">MAILDAY! Just received back my 1999 Base Set 1st Edition Charizard Holographic from VCA grading!</text>
+          <text x="24" y="93" fill="#cbd5e1" font-size="11">Subgrades are pristine across all four corners and centering. Check out the 3D slab inspect!</text>
+
+          <!-- Embedded Slab Visualizer Card -->
+          <g transform="translate(20, 110)">
+            <rect width="790" height="180" rx="10" fill="#060913" stroke="#0ea5e9" stroke-width="1.2"/>
+
+            <!-- Slab Holographic Representation -->
+            <g transform="translate(20, 16)">
+              <rect width="105" height="148" rx="8" fill="#0f172a" stroke="#fbbf24" stroke-width="2" filter="url(#softGlow)"/>
+              <!-- Grade Header -->
+              <rect x="8" y="8" width="89" height="20" rx="4" fill="url(#slabGold)"/>
+              <text x="14" y="22" fill="#000000" font-size="9.5" font-weight="900" letter-spacing="0.5">GEM MINT 10</text>
+              <!-- Charizard Artwork -->
+              <rect x="10" y="34" width="85" height="106" rx="4" fill="#b91c1c"/>
+              <circle cx="52" cy="80" r="28" fill="#f97316"/>
+              <text x="44" y="86" fill="#ffffff" font-size="20">🔥</text>
+            </g>
+
+            <!-- Certification Details -->
+            <g transform="translate(145, 25)">
+              <text x="0" y="0" fill="#38bdf8" font-size="9" font-weight="bold" letter-spacing="0.8">VCA VERIFIED CERTIFICATION</text>
+              <text x="0" y="24" fill="#ffffff" font-size="16" font-weight="bold">Charizard - 1st Edition Shadowless Holo #4/102</text>
+              <text x="0" y="44" fill="#94a3b8" font-size="10" font-family="monospace">Base Set (1999) · Cert #VCA-2026-88001999</text>
+
+              <!-- Subgrades Box Grid -->
+              <g transform="translate(0, 60)">
+                <!-- Centering -->
+                <rect width="90" height="38" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="0.8"/>
+                <text x="20" y="16" fill="#64748b" font-size="8.5">Centering</text>
+                <text x="36" y="32" fill="#38bdf8" font-size="12" font-weight="bold">10</text>
+
+                <!-- Corners -->
+                <g transform="translate(100, 0)">
+                  <rect width="90" height="38" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="0.8"/>
+                  <text x="24" y="16" fill="#64748b" font-size="8.5">Corners</text>
+                  <text x="34" y="32" fill="#38bdf8" font-size="12" font-weight="bold">9.5</text>
+                </g>
+
+                <!-- Edges -->
+                <g transform="translate(200, 0)">
+                  <rect width="90" height="38" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="0.8"/>
+                  <text x="28" y="16" fill="#64748b" font-size="8.5">Edges</text>
+                  <text x="38" y="32" fill="#38bdf8" font-size="12" font-weight="bold">10</text>
+                </g>
+
+                <!-- Surface -->
+                <g transform="translate(300, 0)">
+                  <rect width="90" height="38" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="0.8"/>
+                  <text x="26" y="16" fill="#64748b" font-size="8.5">Surface</text>
+                  <text x="38" y="32" fill="#38bdf8" font-size="12" font-weight="bold">10</text>
+                </g>
+              </g>
+
+              <!-- Market Valuation & Action Button -->
+              <g transform="translate(0, 115)">
+                <text x="0" y="14" fill="#64748b" font-size="10">Valuation: </text>
+                <text x="60" y="14" fill="#10b981" font-size="14" font-weight="900">$345,000</text>
+
+                <g transform="translate(480, -5)">
+                  <rect width="145" height="32" rx="6" fill="#0284c7"/>
+                  <text x="14" y="20" fill="#ffffff" font-size="10.5" font-weight="bold">🔍 Inspect in VCA Lab</text>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

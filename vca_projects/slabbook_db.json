@@ -1,0 +1,380 @@
+{
+  "apiKey": "ossn_vca_1699cc20f844c178d60e3de0e0c846adbf085a45647a570b",
+  "activeThemeId": "pokemon_kanto",
+  "customThemes": [],
+  "components": [
+    {
+      "id": "OssnServices",
+      "name": "OSSN Web Services (REST API)",
+      "version": "6.1.0",
+      "author": "OpenTeknik LLC",
+      "description": "Provides REST API endpoints (v1.0 & v2.0) enabling mobile apps & external bridges.",
+      "isActive": true,
+      "isCore": true
+    },
+    {
+      "id": "OssnWall",
+      "name": "OSSN Newsfeed Wall & Advanced Post",
+      "version": "6.4.0",
+      "author": "OSSN Core Team",
+      "description": "Advanced posting with backgrounds, feelings, locations, privacy filters & tags.",
+      "isActive": true,
+      "isCore": true
+    },
+    {
+      "id": "PokeSlabInspector",
+      "name": "VCA 3D Slab Interactive Inspector",
+      "version": "3.0.0",
+      "author": "VCA Verified Card Authority",
+      "description": "Live 3D interactive tilt, holographic foil rendering, and real-time NFC verification inside posts.",
+      "isActive": true
+    },
+    {
+      "id": "OssnPostBackground",
+      "name": "OSSN Gradient Post Backgrounds",
+      "version": "2.5.0",
+      "author": "OpenTeknik",
+      "description": "Allows users to post status updates with colorful gradient backgrounds.",
+      "isActive": true
+    },
+    {
+      "id": "OssnNotifications",
+      "name": "OSSN Global Push Notification Center",
+      "version": "6.2.0",
+      "author": "OSSN Core Team",
+      "description": "Real-time bell alerts, reaction counters, and cert audit events.",
+      "isActive": true,
+      "isCore": true
+    },
+    {
+      "id": "OssnChat",
+      "name": "OSSN Direct Messaging & Live Chat",
+      "version": "5.8.0",
+      "author": "OSSN Core Team",
+      "description": "Private 1-on-1 direct messaging and real-time trade discussions between collectors.",
+      "isActive": true
+    },
+    {
+      "id": "OssnGroups",
+      "name": "OSSN Collector Guilds & Groups",
+      "version": "6.0.0",
+      "author": "OSSN Core Team",
+      "description": "Create and join specialized TCG groups, grail clubs, and auction rooms.",
+      "isActive": true
+    },
+    {
+      "id": "OssnLikes",
+      "name": "OSSN Reactions & PokéBall Likes",
+      "version": "6.1.0",
+      "author": "OSSN Core Team",
+      "description": "Multi-reaction engine supporting Like, Fire, Love, Grail Trophy, and Master PokéBall.",
+      "isActive": true
+    },
+    {
+      "id": "OssnComments",
+      "name": "OSSN Social Comments & Sub-Threads",
+      "version": "6.0.0",
+      "author": "OSSN Core Team",
+      "description": "Multi-level nested comments, smilies, and real-time discussion thread.",
+      "isActive": true
+    },
+    {
+      "id": "PokeMarketStream",
+      "name": "TCG Live Market Ticker & Sales Stream",
+      "version": "1.8.0",
+      "author": "VCA Autonomous Pricing Engine",
+      "description": "Injects real-time eBay and verified marketplace sales trends into relevant slab posts.",
+      "isActive": true
+    }
+  ],
+  "users": [
+    {
+      "guid": 1,
+      "type": "user",
+      "username": "admin",
+      "email": "admin@vca-os.network",
+      "first_name": "VCA",
+      "last_name": "Administrator",
+      "fullname": "VCA Lead Inspector",
+      "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+      "role": "admin",
+      "badge": "Lead Authenticator 🛡️",
+      "bio": "Senior Forensic Card Grader at VCA. Inspecting Shadowless Grails and Vintage Holos.",
+      "created_at": "2026-01-15T00:00:00Z"
+    },
+    {
+      "guid": 2,
+      "type": "user",
+      "username": "red_collector",
+      "email": "red@kanto.league",
+      "first_name": "Red",
+      "last_name": "Kanto",
+      "fullname": "Red from Pallet Town",
+      "avatar_url": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&auto=format&fit=crop&q=80",
+      "role": "collector",
+      "badge": "Champion Collector 🏆",
+      "bio": "Hunting all 102 Base Set Holos in VCA Gem Mint 10. Just sent in a fresh batch to the Lab.",
+      "created_at": "2026-02-01T12:00:00Z"
+    },
+    {
+      "guid": 3,
+      "type": "user",
+      "username": "cynthia_grails",
+      "email": "cynthia@sinnoh.champions",
+      "first_name": "Cynthia",
+      "last_name": "Sinnoh",
+      "fullname": "Cynthia Grail Vault",
+      "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80",
+      "role": "master_grader",
+      "badge": "Master Grader 🔬",
+      "bio": "Optical and spectral analysis specialist. High-grade Rayquaza Gold Stars and modern Japanese SARs.",
+      "created_at": "2026-02-10T14:30:00Z"
+    },
+    {
+      "guid": 4,
+      "type": "user",
+      "username": "gary_oak",
+      "email": "gary@oak.labs",
+      "first_name": "Gary",
+      "last_name": "Oak",
+      "fullname": "Gary Oak TCG",
+      "avatar_url": "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150&auto=format&fit=crop&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop&q=80",
+      "role": "verified_dealer",
+      "badge": "Verified Dealer 💎",
+      "bio": "Dealer at all major card expos. Buying and selling VCA authenticated slabs.",
+      "created_at": "2026-02-20T09:15:00Z"
+    }
+  ],
+  "posts": [
+    {
+      "guid": 101,
+      "owner_guid": 1,
+      "poster_name": "VCA Lead Inspector",
+      "poster_username": "admin",
+      "poster_avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "poster_badge": "System Administrator 🛡️",
+      "description": "⚡ Welcome to SLABBOOK — The Open Source Social Network for Card Collectors! Connected directly to the VCA Forensic Lab, NFC Registry, and Real-time Pricing Engine. Share your slabs, trade grails, and inspect tamper-proof certificates!",
+      "background_style": "bg-gradient-to-r from-red-600 via-purple-700 to-indigo-900 text-white font-semibold",
+      "location": "VCA High-Security Vault, NY",
+      "feeling": "celebrating milestone 🌟",
+      "privacy": "public",
+      "time_created": 1788518495235,
+      "total_likes": 42,
+      "last_three_reactions": [
+        "fire",
+        "grail",
+        "like"
+      ],
+      "is_liked_by_user": true,
+      "total_comments": 4,
+      "pinned": true
+    },
+    {
+      "guid": 102,
+      "owner_guid": 2,
+      "poster_name": "Red from Pallet Town",
+      "poster_username": "red_collector",
+      "poster_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80",
+      "poster_badge": "Champion Collector 🏆",
+      "description": "MAILDAY! Just received back my 1999 Base Set 1st Edition Charizard Holographic from VCA grading! Subgrades are pristine across all four corners and centering. Check out the 3D slab inspect!",
+      "location": "Pallet Town HQ",
+      "feeling": "feeling hyped 🚀",
+      "privacy": "public",
+      "attached_slab": {
+        "certNumber": "VCA-2026-88001999",
+        "cardName": "Charizard - 1st Edition Shadowless Holo #4/102",
+        "setName": "Base Set (1999)",
+        "year": 1999,
+        "grade": 10,
+        "gradeLabel": "GEM MINT 10",
+        "subgrades": {
+          "centering": 10,
+          "corners": 9.5,
+          "edges": 10,
+          "surface": 10
+        },
+        "valuation": 345000,
+        "imageUrl": "https://images.pokemontcg.io/base1/4_hires.png",
+        "tamperProofHash": "a7f92b49c0182e6d9821"
+      },
+      "time_created": 1788525695235,
+      "total_likes": 89,
+      "last_three_reactions": [
+        "pokeball",
+        "fire",
+        "grail"
+      ],
+      "is_liked_by_user": false,
+      "total_comments": 7
+    },
+    {
+      "guid": 103,
+      "owner_guid": 3,
+      "poster_name": "Cynthia Grail Vault",
+      "poster_username": "cynthia_grails",
+      "poster_avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+      "poster_badge": "Master Grader 🔬",
+      "description": "Microscopic spectral analysis on 2005 EX Deoxys Rayquaza Gold Star completed. Authentic foil rosette pattern and laser edge profile verified. NFC tag bound successfully.",
+      "location": "VCA Forensic Optical Lab",
+      "feeling": "grading with VCA 🔬",
+      "privacy": "public",
+      "attached_slab": {
+        "certNumber": "VCA-2026-77002005",
+        "cardName": "Rayquaza Gold Star #107/107",
+        "setName": "EX Deoxys (2005)",
+        "year": 2005,
+        "grade": 9.5,
+        "gradeLabel": "MINT+ 9.5",
+        "subgrades": {
+          "centering": 9.5,
+          "corners": 9.5,
+          "edges": 9.5,
+          "surface": 9.5
+        },
+        "valuation": 48500,
+        "imageUrl": "https://images.pokemontcg.io/ex8/107_hires.png",
+        "tamperProofHash": "f4820dc7190e23aa1290"
+      },
+      "time_created": 1788532895235,
+      "total_likes": 56,
+      "last_three_reactions": [
+        "fire",
+        "love",
+        "grail"
+      ],
+      "is_liked_by_user": true,
+      "total_comments": 3
+    }
+  ],
+  "comments": [
+    {
+      "id": "c-1",
+      "post_guid": 102,
+      "owner_guid": 3,
+      "user_name": "Cynthia Grail Vault",
+      "user_avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+      "user_badge": "Master Grader 🔬",
+      "comment": "Unbelievable copy! That 50/50 centering is almost impossible to find on English 1st Edition printings. Truly a Museum specimen.",
+      "time_created": 1788529295235
+    },
+    {
+      "id": "c-2",
+      "post_guid": 102,
+      "owner_guid": 4,
+      "user_name": "Gary Oak TCG",
+      "user_avatar": "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150&auto=format&fit=crop&q=80",
+      "user_badge": "Verified Dealer 💎",
+      "comment": "If this is ever open for private offers, DM me directly on SlabBook! Ready wire on standby.",
+      "time_created": 1788531095235
+    },
+    {
+      "id": "c-3",
+      "post_guid": 101,
+      "owner_guid": 2,
+      "user_name": "Red from Pallet Town",
+      "user_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80",
+      "user_badge": "Champion Collector 🏆",
+      "comment": "SlabBook integration is super clean! Love the Pokémon themes and the 3D card tilt.",
+      "time_created": 1788522095235
+    }
+  ],
+  "groups": [
+    {
+      "guid": 1,
+      "title": "Vintage WOTC Grails & Shadowless",
+      "description": "Dedicated to Base Set, Jungle, Fossil, Team Rocket and Gym Challenge holos certified by VCA.",
+      "cover_url": "https://images.unsplash.com/photo-1613771404784-3a5686aa2be3?w=500&auto=format&fit=crop&q=60",
+      "category": "Vintage TCG",
+      "members_count": 1420,
+      "is_member": true
+    },
+    {
+      "guid": 2,
+      "title": "VCA Gem Mint 10 & Black Label Club",
+      "description": "Elite collectors holding pristine condition cards graded 9.5 or 10 with verified NFC tags.",
+      "cover_url": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&auto=format&fit=crop&q=60",
+      "category": "High-End Collectors",
+      "members_count": 850,
+      "is_member": true
+    },
+    {
+      "guid": 3,
+      "title": "Modern Japanese Alternate Arts & SARs",
+      "description": "Sword & Shield, Scarlet & Violet Japanese high-class sets, promo cards & master balls.",
+      "cover_url": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=60",
+      "category": "Japanese TCG",
+      "members_count": 2190,
+      "is_member": false
+    },
+    {
+      "guid": 4,
+      "title": "Card Show & Expo Meetups",
+      "description": "Coordinate trades, cash deals, and table numbers at National, San Diego, and Dallas expos.",
+      "cover_url": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500&auto=format&fit=crop&q=60",
+      "category": "Events & Trade",
+      "members_count": 640,
+      "is_member": false
+    }
+  ],
+  "notifications": [
+    {
+      "id": "n-1",
+      "user_guid": 1,
+      "actor_name": "Red from Pallet Town",
+      "actor_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80",
+      "message": "liked your system announcement post",
+      "type": "like",
+      "time_created": 1788522095235,
+      "viewed": false
+    },
+    {
+      "id": "n-2",
+      "user_guid": 1,
+      "actor_name": "VCA Forensic Lab",
+      "actor_avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "message": "Grading complete: Rayquaza Gold Star certified as 9.5 Mint+ (Cert: VCA-2026-77002005)",
+      "type": "slab_certified",
+      "time_created": 1788529295235,
+      "viewed": false
+    }
+  ],
+  "messages": [
+    {
+      "id": "m-1",
+      "from_guid": 2,
+      "from_name": "Red from Pallet Town",
+      "from_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80",
+      "to_guid": 1,
+      "message": "Hey! Are you bringing the 1st Edition Charizard to the next expo table?",
+      "time_created": 1788525695235,
+      "read": true
+    },
+    {
+      "id": "m-2",
+      "from_guid": 4,
+      "from_name": "Gary Oak TCG",
+      "from_avatar": "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150&auto=format&fit=crop&q=80",
+      "to_guid": 1,
+      "message": "Sent over three raw Gold Stars for optical scan inspection. Let me know when they land!",
+      "time_created": 1788532895235,
+      "read": false
+    }
+  ],
+  "siteSettings": {
+    "siteName": "SLABBOOK",
+    "tagline": "The Open Source Social Network for Certified Collectibles & Slabs",
+    "allowRegistration": true,
+    "maxPostChars": 2000,
+    "allowSlabAttachment": true,
+    "enableLivePricingFeed": true,
+    "systemAnnouncement": "📢 VCA Forensic Grading Submissions now sync live with SlabBook portfolio & feed!"
+  },
+  "metrics": {
+    "totalApiRequests": 154,
+    "lastApiCallTimestamp": 1788536969823
+  }
+}

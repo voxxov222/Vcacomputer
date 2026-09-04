@@ -25,6 +25,7 @@ export type AppId =
   | 'widget_studio'
   | 'emulator'
   | 'software_installer'
+  | 'slabbook'
   | 'settings';
 
 export type ScreenLayout =

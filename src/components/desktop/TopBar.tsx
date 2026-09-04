@@ -22,7 +22,8 @@ import {
   Wrench,
   PanelRightOpen,
   LayoutGrid,
-  Mic
+  Mic,
+  Share2
 } from 'lucide-react';
 
 export const TopBar: React.FC = () => {
@@ -59,7 +60,8 @@ export const TopBar: React.FC = () => {
     closeWindow,
     closeAllWindows,
     tileWindows,
-    snapWindow
+    snapWindow,
+    openWindow
   } = useOS();
 
   const [timeStr, setTimeStr] = useState('');
@@ -113,6 +115,20 @@ export const TopBar: React.FC = () => {
         <span className="hidden sm:inline font-medium text-slate-300 border-l border-slate-800 pl-3">
           {activeWin ? activeWin.title : 'Desktop'}
         </span>
+
+        {/* Quick Launch SlabBook Button */}
+        <button
+          id="topbar-quick-launch-slabbook-btn"
+          onClick={() => openWindow('slabbook')}
+          className="hidden lg:flex items-center gap-1.5 px-2 py-0.5 rounded-lg bg-red-950/60 hover:bg-red-900/80 border border-red-500/40 text-red-200 hover:text-white transition shadow-sm font-semibold text-[11px] cursor-pointer"
+          title="Open SlabBook OSSN Social Network"
+        >
+          <Share2 className="w-3 h-3 text-rose-400" />
+          <span>SlabBook</span>
+          <span className="text-[9px] px-1 py-0.2 rounded bg-red-500/40 text-amber-300 font-extrabold uppercase">
+            OSSN
+          </span>
+        </button>
 
         {/* System menus */}
         <div className="hidden md:flex items-center gap-1 text-slate-400 font-normal text-[11px] relative">
@@ -362,6 +378,18 @@ export const TopBar: React.FC = () => {
           <Wifi className="w-3.5 h-3.5 text-emerald-400" />
           <Battery className="w-3.5 h-3.5 text-slate-300" />
         </div>
+
+        {/* SlabBook Social Network Launcher */}
+        <button
+          id="topbar-slabbook-btn"
+          onClick={() => openWindow('slabbook')}
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold hover:bg-rose-950/60 text-rose-300 hover:text-white bg-slate-900/80 border border-rose-500/40 shadow-sm transition cursor-pointer"
+          title="Open SlabBook OSSN Social Network"
+        >
+          <Share2 className="w-3.5 h-3.5 text-rose-400" />
+          <span className="hidden md:inline">SlabBook</span>
+          <span className="hidden xl:inline text-[9px] px-1 py-0.2 bg-rose-500/30 text-amber-300 rounded font-bold">OSSN</span>
+        </button>
 
         {/* 2-Way Voice Agent Trigger */}
         <button

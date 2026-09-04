@@ -51,10 +51,12 @@ import {
   Star,
   Zap,
   Check,
-  Mic
+  Mic,
+  Share2
 } from 'lucide-react';
 
 const iconMap: Record<string, React.ReactNode> = {
+  Share2: <Share2 className="w-5 h-5 text-rose-400" />,
   Mic: <Mic className="w-5 h-5 text-cyan-400" />,
   Bot: <Bot className="w-5 h-5 text-emerald-400" />,
   Sparkles: <Sparkles className="w-5 h-5 text-cyan-400" />,

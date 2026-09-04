@@ -13,7 +13,8 @@ import {
   CheckSquare,
   Cpu,
   Activity,
-  Bot
+  Bot,
+  Share2
 } from 'lucide-react';
 
 interface DesktopIconItem {
@@ -39,6 +40,12 @@ export const DesktopIcons: React.FC = () => {
       name: 'VCA Forensic Lab',
       appId: 'vca',
       icon: <ShieldCheck className="w-8 h-8 text-cyan-400" />
+    },
+    {
+      id: 'slabbook-social',
+      name: 'SlabBook (OSSN)',
+      appId: 'slabbook',
+      icon: <Share2 className="w-8 h-8 text-blue-400" />
     },
     {
       id: 'engineering-lab',

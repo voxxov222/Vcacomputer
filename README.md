@@ -17,6 +17,20 @@
 
 ---
 
+### 👤 Collector Profile & Cryptographic NFC Ledger
+Verified collector profile featuring portfolio valuation, vault assets, live HUD scanner access, and cryptographic NXP NTAG424 DNA NFC chip tap resolution.
+
+![VCA User Profile & NFC Ownership Ledger Preview](./assets/vca-user-profile-preview.svg)
+
+---
+
+### 🌐 SlabBook — The Collector Social Network (OSSN v6.8)
+Full-featured Open Source Social Network (OSSN) integrated directly into VCA OS, with the Pokémon Kanto League PokéBall theme, rich multi-media composer (photos, GIFs, YouTube videos, links), 3D interactive slab embeds, live grading sync, and collector guilds.
+
+![SlabBook OSSN Social Network Preview](./assets/vca-slabbook-preview.svg)
+
+---
+
 ## 🏛️ System Architecture
 
 ![VCA OS Multi-Agent & Runtime Architecture](./assets/vca-os-architecture.svg)
@@ -54,6 +68,8 @@
 | Application | Description |
 | :--- | :--- |
 | **🛡️ VCA Forensics** | Professional collectible grading lab, optical inspection, and NFC chip binding. |
+| **⬡ SlabBook (OSSN)** | Open Source Social Network (v6.8) for card collectors with live grading sync, guilds, and rich media sharing. |
+| **👤 Collector Portal & NFC Ledger** | Personal collector portfolio, real-time valuation, and hardware cryptographic NTAG424 DNA NFC resolution. |
 | **⚡ Coding Agents Lab** | Autonomous multi-agent software engineering studio with live preview and debugger. |
 | **🐚 Terminal Shell** | Direct Linux container terminal with package manager and git workflows. |
 | **📝 Code IDE** | Full source code editor with syntax tree view, multi-file navigation, and execution. |
@@ -124,8 +140,10 @@ npm run start
 
 ```
 ├── assets/                          # SVG UI previews and architectural diagrams
-│   ├── vca-os-desktop-preview.svg
-│   └── vca-os-architecture.svg
+│   ├── vca-os-desktop-preview.svg   # Primary desktop workspace preview
+│   ├── vca-os-architecture.svg      # Multi-agent & subsystem architecture diagram
+│   ├── vca-user-profile-preview.svg # Collector profile & NFC ledger visual preview
+│   └── vca-slabbook-preview.svg     # SlabBook OSSN social platform preview
 ├── src/
 │   ├── App.tsx                      # Root Desktop Workspace & Layer Composer
 │   ├── main.tsx                     # React 19 Client Entrypoint
@@ -134,6 +152,7 @@ npm run start
 │   │   ├── apps/                    # Integrated Application Suite
 │   │   │   ├── CodingAgentsApp.tsx  # Autonomous AI Coding Swarm Studio
 │   │   │   ├── VCAApp.tsx           # Forensic Collectible Lab & 3D Slab
+│   │   │   ├── SlabBookApp.tsx      # Open Source Social Network (OSSN) Collector Hub
 │   │   │   ├── TerminalApp.tsx      # Linux Host Terminal Shell
 │   │   │   ├── CodeApp.tsx          # Code IDE & Workspace Editor
 │   │   │   ├── SlidesApp.tsx        # AI Slide Decks & Presentation Engine
@@ -155,6 +174,9 @@ npm run start
 │   │   │   ├── CommandPalette.tsx   # Cmd/Ctrl+K Quick Search
 │   │   │   ├── NotificationCenter.tsx # OS Notifications & Approval Toasts
 │   │   │   └── QuickSettings.tsx    # Audio, Display, Network & Mode Toggles
+│   │   ├── public/                  # Public Collector Portals & Slabs
+│   │   │   ├── UserPortal.tsx       # Collector Profile & Cryptographic NFC Ledger
+│   │   │   └── PublicVerification.tsx # Public VCA Cert & QR Verification
 │   │   └── engineering/             # Technology Registries & Hardware Bridge
 │   ├── context/
 │   │   ├── OSContext.tsx            # Global Windowing & Operating System State
@@ -163,6 +185,10 @@ npm run start
 │       ├── os.ts                    # TypeScript Interfaces for Windows & Apps
 │       └── vca.ts                   # Forensic Subgrade & Collectible Types
 ├── server.ts                        # Express IPC Server, Process & File APIs
+├── server_ossn.ts                   # SlabBook OSSN backend endpoints & social data
+├── server_pricing_api.ts            # Live market valuation & pricing adapters
+├── server_scanner_api.ts            # High-res optical scanner bridge
+├── server_vca_api.ts                # VCA certification & ledger endpoints
 ├── metadata.json                    # Application Manifest & Cloud Run Config
 ├── package.json                     # Project Dependencies & Build Scripts
 ├── tsconfig.json                    # Strict TypeScript Compiler Config

@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { VaultCard } from '../../lib/firebase';
 import { useAuth } from '../../context/AuthContext';
+import { InteractiveCard } from '../cards/InteractiveCard';
 
 interface CardDetailModalProps {
   card: VaultCard | null;
@@ -89,26 +90,19 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({ card, onClose,
           
           {/* Left Column: High-Res Card Artwork & Current Raw Value */}
           <div className="lg:col-span-5 flex flex-col items-center">
-            {/* Card Frame with holographic border */}
-            <div className="w-full max-w-[280px] aspect-[2.5/3.5] rounded-2xl overflow-hidden bg-slate-950 border-2 border-cyan-500/40 p-1.5 relative shadow-2xl group">
-              <img
-                src={card.imageUrl}
-                alt={card.name}
-                className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition duration-500"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = "https://images.pokemontcg.io/base1/4_hires.png";
-                }}
+            {/* 3D Holographic Interactive Card */}
+            <div className="w-full max-w-[280px] aspect-[2.5/3.5] flex items-center justify-center">
+              <InteractiveCard
+                frontImage={card.imageUrl}
+                backImage="https://images.pokemontcg.io/base1/back.png"
+                name={card.name}
+                set={card.set}
+                cardNumber={card.cardNumber}
+                variant={card.variant || 'Holo Rare'}
+                holoPattern={card.variant?.toLowerCase().includes('cosmos') ? 'cosmos' : card.variant?.toLowerCase().includes('gold') ? 'gold' : card.variant?.toLowerCase().includes('reverse') ? 'reverse_holo' : 'classic'}
+                showBadges={true}
+                className="w-full h-full shadow-2xl"
               />
-
-              {/* Variant Badge Overlay */}
-              <div className="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-xl bg-slate-950/90 border border-cyan-400/60 text-cyan-300 font-mono text-[10px] font-bold shadow-lg">
-                {card.variant || 'Normal'}
-              </div>
-
-              {/* Collector Number Badge */}
-              <div className="absolute bottom-3.5 left-3.5 px-2.5 py-0.5 rounded-lg bg-black/80 backdrop-blur text-slate-300 font-mono text-[10px] border border-slate-700">
-                {card.set} • {card.cardNumber}
-              </div>
             </div>
 
             {/* Current Raw Value Card */}

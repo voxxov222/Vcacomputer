@@ -4,6 +4,9 @@ import { VCACardRecord, VCASubmission, VCAForensicReport, VCAGradeCriteria, AppI
 import { getCanonicalReferenceImage, findReferenceCardByQuery } from '../../lib/cardReference';
 import { ForensicLabSuite } from '../forensics/ForensicLabSuite';
 import { NfcSlabManager } from '../nfc/NfcSlabManager';
+import { VCASlab } from '../slab/VCASlab';
+import { InteractiveCard } from '../cards/InteractiveCard';
+import { CardViewer } from '../cards/CardViewer';
 import {
   ShieldCheck,
   Camera,
@@ -1412,34 +1415,41 @@ export const VCAApp: React.FC<VCAAppProps> = ({ defaultTab, initialTab, cardId, 
                     }
                   }}
                   style={{ transform: `scale(${zoomLevel})`, transition: 'transform 0.15s ease-out' }}
-                  className="relative w-72 aspect-[3/4.2] rounded-xl overflow-hidden border border-slate-700 shadow-2xl bg-black cursor-crosshair"
+                  className="relative w-72 aspect-[2.5/3.5] flex items-center justify-center cursor-crosshair"
                 >
-                  <img
-                    src={isFlipped ? selectedCard?.backImage : selectedCard?.frontImage}
-                    alt="Inspection target"
-                    className="w-full h-full object-cover"
-                  />
+                  <InteractiveCard
+                    frontImage={selectedCard?.frontImage || 'https://images.pokemontcg.io/base1/4_hires.png'}
+                    backImage={selectedCard?.backImage || 'https://images.pokemontcg.io/base1/back.png'}
+                    name={selectedCard?.name}
+                    set={selectedCard?.set}
+                    cardNumber={selectedCard?.cardNumber}
+                    variant={selectedCard?.variant || 'Holo'}
+                    isFlipped={isFlipped}
+                    disabledTilt={selectedTool === 'defect' || zoomLevel > 1.2}
+                    showBadges={false}
+                    className="w-full h-full"
+                  >
+                    {/* Centering overlay guides */}
+                    {selectedTool === 'centering' && (
+                      <div className="absolute inset-0 pointer-events-none border border-cyan-400/60 grid grid-cols-10 grid-rows-10 opacity-70 z-30">
+                        <div className="col-span-1 border-r border-cyan-400/40" />
+                        <div className="col-span-8 border-r border-cyan-400/40" />
+                        <div className="col-span-1" />
+                      </div>
+                    )}
 
-                  {/* Centering overlay guides */}
-                  {selectedTool === 'centering' && (
-                    <div className="absolute inset-0 pointer-events-none border border-cyan-400/60 grid grid-cols-10 grid-rows-10 opacity-70">
-                      <div className="col-span-1 border-r border-cyan-400/40" />
-                      <div className="col-span-8 border-r border-cyan-400/40" />
-                      <div className="col-span-1" />
-                    </div>
-                  )}
-
-                  {/* Defect Markers */}
-                  {annotations.map((ann) => (
-                    <div
-                      key={ann.id}
-                      style={{ top: `${ann.y}%`, left: `${ann.x}%` }}
-                      className="absolute -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-rose-500 bg-rose-500/30 flex items-center justify-center text-[9px] font-bold text-white shadow-lg animate-pulse"
-                      title={`${ann.type}: ${ann.note}`}
-                    >
-                      !
-                    </div>
-                  ))}
+                    {/* Defect Markers */}
+                    {annotations.map((ann) => (
+                      <div
+                        key={ann.id}
+                        style={{ top: `${ann.y}%`, left: `${ann.x}%` }}
+                        className="absolute -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-rose-500 bg-rose-500/30 flex items-center justify-center text-[9px] font-bold text-white shadow-lg animate-pulse z-40"
+                        title={`${ann.type}: ${ann.note}`}
+                      >
+                        !
+                      </div>
+                    ))}
+                  </InteractiveCard>
                 </div>
 
                 {/* Flip front / back button */}
@@ -2107,72 +2117,28 @@ export const VCAApp: React.FC<VCAAppProps> = ({ defaultTab, initialTab, cardId, 
 
             {/* 3D Slab Interactive Orbit Viewport */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-              <div
-                onMouseDown={handleSlabMouseDown}
-                onMouseMove={handleSlabMouseMove}
-                onMouseUp={handleSlabMouseUp}
-                className="lg:col-span-7 bg-slate-900/60 border border-slate-800 rounded-3xl p-8 flex items-center justify-center min-h-[460px] cursor-grab active:cursor-grabbing select-none perspective-1000"
-              >
-                {/* 3D Slab Container */}
-                <div
-                  style={{
-                    transform: `rotateX(${slabRotation.x}deg) rotateY(${slabRotation.y + (isFlipped ? 180 : 0)}deg)`,
-                    transition: isDraggingSlab ? 'none' : 'transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1)',
-                    transformStyle: 'preserve-3d'
+              <div className="lg:col-span-7 bg-slate-900/60 border border-slate-800 rounded-3xl p-6 sm:p-8 flex items-center justify-center min-h-[500px]">
+                <VCASlab
+                  cardName={selectedCard?.name || 'Unidentified Card'}
+                  set={selectedCard?.set || 'Standard Set'}
+                  cardNumber={selectedCard?.cardNumber || '001/100'}
+                  year={selectedCard?.year || 2026}
+                  frontImage={selectedCard?.frontImage || 'https://images.pokemontcg.io/base1/4_hires.png'}
+                  backImage={selectedCard?.backImage || 'https://images.pokemontcg.io/base1/back.png'}
+                  grade={selectedCard?.grade || 9.0}
+                  gradeLabel={selectedCard?.grade && selectedCard.grade >= 9.5 ? 'GEM MINT' : selectedCard?.grade && selectedCard.grade >= 9.0 ? 'MINT' : 'NEAR MINT'}
+                  subgrades={{
+                    centering: selectedCard?.subgrades?.centering || 9.5,
+                    corners: selectedCard?.subgrades?.corners || 9.0,
+                    edges: selectedCard?.subgrades?.edges || 9.5,
+                    surface: selectedCard?.subgrades?.surface || 9.0,
                   }}
-                  className="w-72 aspect-[3/4.6] bg-slate-950/80 rounded-2xl border-4 border-slate-300/30 p-2.5 shadow-2xl shadow-cyan-950/60 relative flex flex-col justify-between backdrop-blur-xl"
-                >
-                  {/* Holographic Header Label */}
-                  <div className="h-16 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border border-cyan-500/50 rounded-xl p-2 flex items-center justify-between text-white shadow-inner relative overflow-hidden">
-                    {/* Holographic shimmer effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent translate-x-[-100%] animate-[shimmer_3s_infinite]" />
-
-                    <div>
-                      <div className="flex items-center gap-1">
-                        <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
-                        <span className="text-[10px] font-black tracking-widest text-cyan-300">VCA AUTHORITY</span>
-                      </div>
-                      <div className="text-[11px] font-bold text-white truncate max-w-[130px]">
-                        {selectedCard?.name || 'Unidentified Card'}
-                      </div>
-                      <div className="text-[9px] text-slate-400 font-mono truncate">
-                        {selectedCard?.set || ''} {selectedCard?.cardNumber ? `#${selectedCard.cardNumber}` : ''}
-                      </div>
-                    </div>
-
-                    <div className="text-right flex flex-col items-end">
-                      <div className="text-[9px] text-cyan-400 font-mono font-bold">CERTIFIED</div>
-                      <div className="text-xl font-black text-amber-400 tracking-tight leading-none">
-                        {selectedCard?.grade || 9.0}
-                      </div>
-                      <div className="text-[8px] text-slate-500 font-mono">
-                        {selectedCard?.certificationNumber || 'VCA-2026-000128'}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Encapsulated Card Image inside Slab */}
-                  <div className="flex-1 my-2 rounded-xl overflow-hidden border border-slate-700/80 shadow-2xl bg-black flex items-center justify-center relative">
-                    <img
-                      src={isFlipped ? selectedCard?.backImage : selectedCard?.frontImage}
-                      alt="Encapsulated Card"
-                      className="w-full h-full object-cover"
-                    />
-
-                    {/* Plastic reflection overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
-                  </div>
-
-                  {/* Bottom Slab Footer with NFC & QR chip icons */}
-                  <div className="h-7 bg-slate-900/90 rounded-lg px-2 flex items-center justify-between text-[9px] text-slate-400 font-mono border border-slate-800">
-                    <span className="flex items-center gap-1 text-cyan-400">
-                      <Radio className="w-3 h-3" /> NFC VERIFIED
-                    </span>
-                    <span className="flex items-center gap-1 text-slate-300">
-                      <QrCode className="w-3 h-3" /> {selectedCard?.serialNumber?.slice(0, 10) || 'SN-AUT-9482'}
-                    </span>
-                  </div>
-                </div>
+                  certificationNumber={selectedCard?.certificationNumber || 'VCA-2026-000128'}
+                  serialNumber={selectedCard?.serialNumber || 'SN-AUT-9482'}
+                  nfcId={selectedCard?.nfcId || 'NFC-VCA-7701'}
+                  isFlipped={isFlipped}
+                  onFlip={(next) => setIsFlipped(next)}
+                />
               </div>
 
               {/* Public Certificate Data & Verification Link */}

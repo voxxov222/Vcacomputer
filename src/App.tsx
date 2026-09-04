@@ -44,10 +44,11 @@ import { ActivityApp } from './components/apps/ActivityApp';
 import { EmulatorApp } from './components/apps/EmulatorApp';
 import { SoftwareInstallerApp } from './components/apps/SoftwareInstallerApp';
 import { VoiceAgentApp } from './components/apps/VoiceAgentApp';
+import { SlabBookApp } from './components/apps/SlabBookApp';
 import { VoiceAgentOverlay } from './components/desktop/VoiceAgentOverlay';
 import { MultiScreenWorkspace } from './components/desktop/MultiScreenWorkspace';
 import { SideToolsPanel } from './components/desktop/SideToolsPanel';
-import { Wrench } from 'lucide-react';
+import { Wrench, Share2 } from 'lucide-react';
 
 const DesktopWorkspace: React.FC = () => {
   const {
@@ -206,6 +207,8 @@ const DesktopWorkspace: React.FC = () => {
       case 'software_installer':
       case 'installer':
         return <SoftwareInstallerApp />;
+      case 'slabbook':
+        return <SlabBookApp />;
       default:
         return <VCAApp />;
     }
@@ -402,26 +405,66 @@ const DesktopWorkspace: React.FC = () => {
 };
 
 export default function App() {
-  const [viewMode, setViewMode] = useState<'admin' | 'user'>('user');
+  const [viewMode, setViewMode] = useState<'admin' | 'user' | 'slabbook'>('user');
 
   return (
     <AuthProvider>
-      {viewMode === 'admin' ? (
-        <OSProvider>
+      <OSProvider>
+        {viewMode === 'admin' ? (
           <DesktopWorkspace />
-        </OSProvider>
-      ) : (
-        <UserPortal />
-      )}
-      
-      {/* Universal Mode Switcher */}
-      <button 
-        onClick={() => setViewMode(prev => prev === 'admin' ? 'user' : 'admin')}
-        className="fixed bottom-6 right-6 z-[99999] bg-slate-900/90 backdrop-blur border border-slate-700 hover:border-cyan-500 text-slate-300 hover:text-white px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xl transition flex items-center gap-2 group"
-      >
-        <div className={`w-2 h-2 rounded-full ${viewMode === 'admin' ? 'bg-amber-500' : 'bg-emerald-500'} group-hover:animate-pulse`} />
-        Switch to {viewMode === 'admin' ? 'User Portal' : 'Admin OS'}
-      </button>
+        ) : viewMode === 'slabbook' ? (
+          <div className="w-screen h-screen flex flex-col bg-slate-950 overflow-hidden">
+            <SlabBookApp
+              onBackToPortal={() => setViewMode('user')}
+              onOpenAdminOs={() => setViewMode('admin')}
+            />
+          </div>
+        ) : (
+          <UserPortal onEnterSlabBook={() => setViewMode('slabbook')} />
+        )}
+
+        {/* Universal Mode Switcher */}
+        <div className="fixed bottom-6 right-6 z-[99999] bg-slate-900/95 backdrop-blur-xl border border-slate-700/80 hover:border-cyan-500/60 p-1.5 rounded-full shadow-2xl transition-all flex items-center gap-1.5">
+          <button
+            id="switch-to-user-portal-btn"
+            onClick={() => setViewMode('user')}
+            className={`px-3 py-1.5 rounded-full text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+              viewMode === 'user' ? 'bg-emerald-500 text-slate-950 shadow-md font-black' : 'text-slate-300 hover:text-white hover:bg-slate-800'
+            }`}
+          >
+            <div className={`w-2 h-2 rounded-full ${viewMode === 'user' ? 'bg-slate-950' : 'bg-emerald-400'}`} />
+            <span>User Portal</span>
+          </button>
+
+          <button
+            id="switch-to-slabbook-btn"
+            onClick={() => setViewMode('slabbook')}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+              viewMode === 'slabbook'
+                ? 'bg-gradient-to-r from-red-600 via-rose-600 to-amber-500 text-white shadow-md font-black'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800'
+            }`}
+            title="Enter SlabBook OSSN Social Network"
+          >
+            <Share2 className="w-3.5 h-3.5 text-rose-400" />
+            <span>Enter SlabBook</span>
+            <span className="text-[9px] px-1 py-0.2 rounded bg-red-500/40 font-extrabold text-amber-300 uppercase tracking-wider">
+              OSSN
+            </span>
+          </button>
+
+          <button
+            id="switch-to-admin-os-btn"
+            onClick={() => setViewMode('admin')}
+            className={`px-3 py-1.5 rounded-full text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+              viewMode === 'admin' ? 'bg-amber-500 text-slate-950 shadow-md font-black' : 'text-slate-300 hover:text-white hover:bg-slate-800'
+            }`}
+          >
+            <div className={`w-2 h-2 rounded-full ${viewMode === 'admin' ? 'bg-slate-950' : 'bg-amber-400'}`} />
+            <span>Admin OS</span>
+          </button>
+        </div>
+      </OSProvider>
     </AuthProvider>
   );
 }

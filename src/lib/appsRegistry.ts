@@ -287,6 +287,17 @@ export const APPS_REGISTRY: Record<AppId, AppMetadata> = {
     minWidth: 540,
     minHeight: 400
   },
+  slabbook: {
+    id: 'slabbook',
+    name: 'SlabBook — Social Network',
+    icon: 'Share2',
+    category: 'Specialized',
+    description: 'Open Source Social Network (OSSN) for card collectors with Pokémon themes, advanced posting, live 3D slab tilt & OSSN Admin Dashboard.',
+    defaultWidth: 1040,
+    defaultHeight: 700,
+    minWidth: 620,
+    minHeight: 460
+  },
   settings: {
     id: 'settings',
     name: 'System Settings',

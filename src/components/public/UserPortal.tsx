@@ -7,7 +7,7 @@ import {
   Search, Radio, TrendingUp, DollarSign, Camera, CheckCircle2, 
   ExternalLink, Sparkles, ChevronRight, RefreshCw, Eye, ArrowUpRight,
   Sliders, Layers, Award, AlertCircle, Copy, Check, BarChart3, Wifi,
-  Zap, LogIn, LogOut, User as UserIcon
+  Zap, LogIn, LogOut, User as UserIcon, Share2
 } from 'lucide-react';
 import { getStoredCollection, saveStoredCollection, addCardToCollection, UserCollectionItem, resolveNfcSlab } from '../../lib/cardDatabase';
 import { REFERENCE_CATALOG, ReferenceCard } from '../../lib/cardReference';
@@ -201,7 +201,11 @@ const RealisticVcaSlab3D = ({
   );
 };
 
-export const UserPortal: React.FC = () => {
+export interface UserPortalProps {
+  onEnterSlabBook?: () => void;
+}
+
+export const UserPortal: React.FC<UserPortalProps> = ({ onEnterSlabBook }) => {
   const { user, vault, openAuthModal, logout, isAuthModalOpen, closeAuthModal } = useAuth();
   
   const [profile, setProfile] = useState({
@@ -362,6 +366,22 @@ export const UserPortal: React.FC = () => {
         
         {/* Banner Actions */}
         <div className="absolute top-4 right-4 flex items-center gap-3">
+          {/* Enter SlabBook CTA Button */}
+          {onEnterSlabBook && (
+            <button
+              id="user-portal-enter-slabbook-btn"
+              onClick={onEnterSlabBook}
+              className="bg-gradient-to-r from-red-600 via-rose-600 to-amber-500 hover:brightness-110 text-white font-black px-4 py-2 rounded-xl flex items-center gap-2 shadow-2xl transition text-xs font-mono tracking-wider cursor-pointer border border-white/20 animate-in fade-in"
+              title="Open SlabBook OSSN Social Network"
+            >
+              <Share2 className="w-4 h-4 text-white animate-pulse" />
+              <span>ENTER SLABBOOK</span>
+              <span className="bg-black/40 text-[9px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider text-amber-300">
+                OSSN
+              </span>
+            </button>
+          )}
+
           <button
             onClick={() => setIsLiveScannerOpen(true)}
             className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black px-4 py-2 rounded-xl flex items-center gap-2 shadow-2xl transition text-xs font-mono tracking-wider cursor-pointer"
@@ -528,12 +548,66 @@ export const UserPortal: React.FC = () => {
             >
               <Wifi className="w-4 h-4" /> NFC Slab Ledger
             </button>
+
+            {onEnterSlabBook && (
+              <button 
+                id="user-portal-tabs-enter-slabbook-btn"
+                onClick={onEnterSlabBook}
+                className="px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition flex items-center gap-2 bg-gradient-to-r from-red-500/25 via-rose-500/25 to-amber-500/25 text-rose-300 border border-rose-500/50 hover:bg-rose-500/35 hover:text-white shadow-lg cursor-pointer group"
+                title="Enter SlabBook OSSN Social Network"
+              >
+                <Share2 className="w-4 h-4 text-rose-400 group-hover:rotate-12 transition-transform" />
+                <span>Enter SlabBook</span>
+                <span className="px-1.5 py-0.2 rounded bg-rose-500/40 text-[9px] font-extrabold text-amber-300 uppercase">OSSN</span>
+              </button>
+            )}
           </div>
         </div>
 
         {/* Tab 0: PERSISTENT FIRESTORE VAULT & PORTFOLIO */}
         {activeTab === 'vault' && (
-          <div className="mt-8">
+          <div className="mt-8 space-y-6">
+            {/* SlabBook Social Network Discovery Banner */}
+            {onEnterSlabBook && (
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-red-950/70 via-slate-900 to-amber-950/50 border border-rose-500/40 p-5 shadow-2xl backdrop-blur-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 group">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 via-rose-600 to-amber-500 flex items-center justify-center shadow-lg shadow-red-600/30 shrink-0 group-hover:scale-105 transition-transform">
+                    <Share2 className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono font-bold tracking-widest text-rose-400 uppercase">
+                        VCA SOCIAL PLATFORM
+                      </span>
+                      <span className="px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 font-black text-[9px] border border-rose-500/30 uppercase tracking-wider">
+                        OSSN v6.8
+                      </span>
+                      <span className="flex items-center gap-1 text-[10px] text-emerald-400 font-bold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                        LIVE
+                      </span>
+                    </div>
+                    <h3 className="text-base font-black text-white">
+                      Enter SlabBook — The TCG Collector Social Network
+                    </h3>
+                    <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
+                      Share your authenticated slabs, post updates with photos, GIFs, YouTube videos, links, and trade with verified collectors worldwide.
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  id="user-portal-banner-enter-slabbook-btn"
+                  onClick={onEnterSlabBook}
+                  className="shrink-0 bg-gradient-to-r from-red-600 via-rose-600 to-amber-500 hover:brightness-110 text-white font-black px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-xl shadow-rose-900/40 transition text-xs font-mono tracking-wider cursor-pointer border border-white/20 hover:scale-102"
+                >
+                  <Share2 className="w-4 h-4 text-white" />
+                  <span>ENTER SLABBOOK</span>
+                  <ChevronRight className="w-4 h-4 text-amber-200" />
+                </button>
+              </div>
+            )}
+
             <VaultGrid 
               onInspectSlab={(card) => {
                 const pricing = generateAccuratePricing(
