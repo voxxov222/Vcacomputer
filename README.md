@@ -11,9 +11,21 @@
 
 ---
 
+## 🔗 Live Application
+
+[**https://vcacomputer.vercel.app/**](https://vcacomputer.vercel.app/)
+
+---
+
 ## 📸 Operating System Preview
 
 ![VCA OS Desktop Workspace Preview](./assets/vca-os-desktop-preview.svg)
+
+---
+
+### 🛡️ Verified Card Authority — Holographic Slab
+
+![VCA Card Slab](grok_1788538080966.jpg)
 
 ---
 
